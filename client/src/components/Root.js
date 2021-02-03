@@ -1,0 +1,3 @@
+/*
+    Component that holds application together
+*/
