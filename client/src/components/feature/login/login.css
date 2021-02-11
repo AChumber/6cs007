@@ -1,0 +1,105 @@
+.form-wrapper {
+    height: 100vh;
+    display: flex;
+}
+
+.form-image {
+    background-image: url("../../../assets/images/form-image.jpg");
+    background-position: center;
+    background-size: cover;
+    filter: grayscale(95%);
+    opacity: 50%;
+    width: 50%;
+}
+
+.right-side {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5%;
+}
+.container {
+    width: 75%;
+    position: relative;
+}
+.right-side h4 {
+    font-size: 32px;
+    text-align: center;
+    margin-bottom: .30em;
+}
+.right-side hr {
+    background-color: #512D38;
+    width: 50%;
+    margin-bottom: 1.75em;
+}
+.form-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 75%;
+    padding-top: 1em;
+}
+.form-input label {
+    align-self: flex-start;
+} 
+.form-input input {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: 1em;
+    width: 100%;
+    border: 1px solid rgba(53,53,53,.4);
+    border-radius: 5px;
+    background-color: #FFFFFF;
+}
+.container p {
+    text-align: center;
+    font-size: 12px;
+}
+.container .form-span {
+    text-decoration: underline;
+    color: #0000EE;
+    cursor: pointer;
+}
+.container button {
+    display: block;
+    margin: .5em auto;
+    width: 50%;
+    padding: .75em;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    color: #FAFAFA;
+    background-color: #284B63;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+}
+.container button:hover {
+    background-color: #1d3747;
+}
+
+/*Phone Size - Smaller text and box size*/
+@media only screen and (max-width: 768px){
+    .form-wrapper {
+        flex-direction: column;
+        height: 100vh;
+    }
+    .form-image {
+        width: 100%;
+        height: 30%;
+    }
+    .right-side {
+        width: 100%;
+        height: 70%;
+        margin-top: .5em;
+    }
+    .right-side h4 {
+        font-size: 24px;
+    }
+    .container button {
+        margin-top: 1.5em;
+    }
+}
