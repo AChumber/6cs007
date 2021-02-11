@@ -1,7 +1,11 @@
+import Login from "./components/feature/login/Login"
+import Navbar from "./components/layout/navbar/Navbar";
+//<Navbar isLoggedIn={ false }/>
+
 const App = () => {
   return (
     <div className="App">
-      <h1>Hello World</h1>      
+      <Login />   
     </div>
   );
 }
