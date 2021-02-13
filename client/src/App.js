@@ -1,11 +1,25 @@
+import Landing from './components/feature/landing/Landing';
 import Login from "./components/feature/login/Login"
+import Footer from './components/layout/footer/Footer';
 import Navbar from "./components/layout/navbar/Navbar";
-//<Navbar isLoggedIn={ false }/>
-
+import { BrowserRouter,Switch,Route } from 'react-router-dom';
 const App = () => {
-  return (
+  return(
     <div className="App">
-      <Login />   
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login" >
+            <Login />
+          </Route>
+        </Switch>
+
+        <Navbar isLoggedIn={ false } />
+        <Switch>
+          <Route exact path="/" component={ Landing } />
+        </Switch>
+        <Footer isLoggedIn={ false } />
+        
+      </BrowserRouter>
     </div>
   );
 }
