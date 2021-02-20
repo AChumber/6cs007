@@ -2,7 +2,6 @@
 import LoginForm from './auth/LoginForm';
 import CreateAccount from './create/CreateAccount';
 import './login.css';
-import formImage from '../../../assets/images/form-image.jpg';
 import { useState } from 'react'; 
 
 const Login = () => {

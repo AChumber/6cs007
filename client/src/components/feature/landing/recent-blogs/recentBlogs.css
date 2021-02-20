@@ -1,0 +1,13 @@
+.section-heading {
+    position: relative;
+}
+.section-heading h1 {
+    font-size: var(--subheading-font-size);
+}
+.section-heading hr {
+    background: var(--secondary-color);
+    position: absolute;
+    width: 15%;
+    bottom: -10%;
+    left: -2%;
+}

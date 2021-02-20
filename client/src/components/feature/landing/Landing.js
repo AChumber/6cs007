@@ -1,10 +1,18 @@
 //Landing page component
+import Hero from "./hero/Hero"
+import RecentBlogs from "./recent-blogs/RecentBlogs"
 
 const Landing = () => {
+    const containerStyle = {
+        width: "90%",
+        margin: "auto"
+    }
     return(
         <>
-            <h1>Landing Component here</h1>
-            <p>Users will come onto this page</p>
+            <Hero />
+            <div className="container" style={ containerStyle }>
+                <RecentBlogs />
+            </div>
         </>
     );
 };
