@@ -10,7 +10,7 @@ const Landing = () => {
     return(
         <>
             <Hero />
-            <div className="container" style={ containerStyle }>
+            <div style={ containerStyle }>
                 <RecentBlogs />
             </div>
         </>

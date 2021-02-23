@@ -1,4 +1,5 @@
 import './navbar.css';
+import { Link } from 'react-router-dom';
 import Logo from '../../../assets/images/Logo.svg';
 
 const Navbar = ({ isLoggedIn }) => {
@@ -7,7 +8,7 @@ const Navbar = ({ isLoggedIn }) => {
     }
     const notloggedIn = (
         <>
-            <a href="#" className="navbar-link">Login</a>
+            <Link to="/login" className="navbar-link">Login</Link>
             <a href="#" className="navbar-link navbar-button">Sign Up</a>
         </>
     );
