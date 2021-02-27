@@ -7,17 +7,17 @@ const App = () => {
   return(
     <div className="App">
       <BrowserRouter>
-        <Switch>
-          <Route exact path="/login" >
-            <Login />
-          </Route>
-        </Switch>
 
-        <Navbar isLoggedIn={ false } />
+        
         <Switch>
-          <Route exact path="/" component={ Landing } />
+          <Route exact path="/login" component={ Login } />
+          <>
+            <Navbar isLoggedIn={ false } />
+            <Route exact path="/" component={ Landing } />
+            <Footer isLoggedIn={ false } />
+          </>
         </Switch>
-        <Footer isLoggedIn={ false } />
+        
         
       </BrowserRouter>
     </div>
