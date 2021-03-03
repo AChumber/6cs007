@@ -3,13 +3,12 @@
     margin: auto;
 }
 .content-section h1 {
-    margin-bottom: 0;
+    margin-bottom: -0.75rem;
 }
 .content-section p {
     margin-bottom: .5rem;
-}
-.header {
-    position: relative;
+    font-size: 1.125rem;
+    color: var(--subheading-color);
 }
 .header hr {
     background-color: var(--secondary-color);
@@ -19,6 +18,8 @@
 }
 .create-form {
     padding: 1rem 0;
+    margin-top: .5rem;
+    margin-bottom: 3rem;
 }
 .form-group {
     display: flex;
@@ -32,6 +33,10 @@
     border: 1px solid #E0E0E0;
     background-color: #FEFEFE;
 }
+.form-group small {
+    font-size: 0.75rem;
+    color: #8b8b8b;
+}
 .form-group-btn {
     width: 15%;
     display: flex;
@@ -39,7 +44,7 @@
     align-content: center;
 }
 .form-group-btn :is(button, a) {
-    padding: .4rem .5rem;
+    padding: .4rem .8rem;
     border-radius: 5px;
     font-size: .875rem;
     transition: all 0.15s ease-out;
@@ -48,6 +53,7 @@
     border: none;
     background-color: var(--primary-color);
     color: var(--bg-color);
+    cursor: pointer;
 }
 .form-group-btn button:hover {
     border: 1px solid var(--primary-color);
