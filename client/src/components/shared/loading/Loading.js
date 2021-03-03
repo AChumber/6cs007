@@ -1,6 +1,6 @@
 import './loading.css';
 
-export default () => {
+const Loading = () => {
     return(
         <div className="loading-wrapper">
             <div className="loading-circle circle-1"></div>
@@ -9,3 +9,4 @@ export default () => {
         </div>
     );
 }
+export default Loading;

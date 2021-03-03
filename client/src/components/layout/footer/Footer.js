@@ -1,5 +1,6 @@
 import './footer.css';
 import Logo from '../../../assets/images/Logo.svg';
+import { Link } from 'react-router-dom';
 
 const Footer = ({ isLoggedIn }) => {
     const signedIn = (
@@ -11,8 +12,8 @@ const Footer = ({ isLoggedIn }) => {
     );
     const notSignedIn = (
         <>
-        <li><a href="#">Sign in</a></li>
-        <li><a href="#">Create an Account</a></li>
+        <li><Link to="/login">Sign in</Link></li>
+        <li><Link to="/create-account">Create an Account</Link></li>
         </>
     );
     return(
@@ -20,7 +21,9 @@ const Footer = ({ isLoggedIn }) => {
             <div className="left-links">
                 <div className="links">
                     <div className="logo-wrapper">
-                        <img src={ Logo } alt="Logo for MyBlogs"/>
+                        <Link to="/" title="Click to go to Home page">
+                            <img src={ Logo } alt="Logo for MyBlogs"/>
+                        </Link>
                     </div>
                     <ul className="footer-links">
                         { isLoggedIn ? signedIn : notSignedIn }

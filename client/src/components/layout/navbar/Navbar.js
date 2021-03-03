@@ -9,7 +9,7 @@ const Navbar = ({ isLoggedIn }) => {
     const notloggedIn = (
         <>
             <Link to="/login" className="navbar-link">Login</Link>
-            <a href="#" className="navbar-link navbar-button">Sign Up</a>
+            <Link to="/create-account" className="navbar-link navbar-button">Sign Up</Link>
         </>
     );
     const loggedIn = (
@@ -22,7 +22,7 @@ const Navbar = ({ isLoggedIn }) => {
     return(
         <>
         <nav className="navbar">
-            <img src={Logo} alt="Blogs Logo" />
+            <Link to="/" title="Click to go to Home page"><img src={Logo} alt="Blogs Logo" /></Link>
             <div className="navbar-link-wrapper" style={widthStyle}>
                 { isLoggedIn ? loggedIn : notloggedIn }
             </div>

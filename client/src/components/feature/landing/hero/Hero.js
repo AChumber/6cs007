@@ -1,6 +1,7 @@
 //Component for hero section of landing page
 import './hero.css';
 import HeroImage from '../../../../assets/images/hero-image.jpg';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
     return(
@@ -14,8 +15,8 @@ const Hero = () => {
                     <p>Login to post your own or comment on those blogs you enjoy!</p>
                 </div>
                 <div className="right-buttons">
-                    <button>Create my Blog</button>
-                    <button>Create Account</button>
+                    <Link to="/create-post">Create my Blog</Link>
+                    <Link to="/create-account">Create Account</Link>
                 </div>
             </div>
         </div>

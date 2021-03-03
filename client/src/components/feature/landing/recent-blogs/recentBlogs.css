@@ -20,6 +20,7 @@
 .blog-card {
     height: 35vh;
     border: 1px solid rgba(0,0,0,.2);
+    border-radius: 5px;
     padding: 0 1rem;
     position: relative;
     cursor: pointer;
@@ -41,7 +42,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: var(--body-font-size);
-    color: #363636;
+    color: #4e4e4e;
 }
 .blog-card .post-author {
     font-size: 0.7rem;
@@ -50,4 +51,25 @@
     right: 5%;
     transform: translate(-5%, -0%);
     color: #929292;
+}
+.btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.link-btn {
+    display: inline-block;
+    border: 1px solid var(--primary-color);
+    background: var(--bg-color);
+    padding: 0.5rem 0.8rem;
+    margin-top: .5rem;
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: all 0.15s ease-out;
+    font-size: var(--body-font-size);
+    border-radius: 5px;
+}
+.link-btn:hover {
+    background: rgba(40,75,99,.05); 
+    border-radius: 3px;
 }

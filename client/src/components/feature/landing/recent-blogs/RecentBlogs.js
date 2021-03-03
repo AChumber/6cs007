@@ -1,5 +1,6 @@
 //Child component to display recent blogs for Landing Page.
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import BlogCard from './BlogCard';
 import Loading from '../../../shared/loading/Loading';
 import './recentBlogs.css';
@@ -21,11 +22,14 @@ const RecentBlogs = () => {
     return(
         <section>
             <div className="section-heading">
-                <h1>Most Recent Blogs</h1>
+                <h1>Recent Blogs</h1>
                 <hr />
             </div>
             <div className="blog-grid">
                 { isFetching? <Loading /> : posts.map(post => <BlogCard key={post.id} post={post} />) }
+            </div>
+            <div className="btn-container">
+                <Link to='/posts' className="link-btn">Find more Posts</Link>
             </div>
         </section>
     );

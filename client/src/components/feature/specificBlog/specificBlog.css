@@ -1,0 +1,7 @@
+.no-content {
+    margin: 1rem auto;
+    width: 50%;
+    border: 1px solid var(--primary-color);
+    padding: 1rem;
+    text-align: center;
+}
