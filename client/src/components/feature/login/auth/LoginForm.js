@@ -15,7 +15,7 @@ const LoginForm = ({ changePage }) => {
 
     return(
         <form className="right-side">
-            <div className="container">
+            <div className="form-container">
                 <h4>Hi. Log in to share your experiences!</h4>
                 <hr />
                 <div className="form-input">

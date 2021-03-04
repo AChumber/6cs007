@@ -21,10 +21,10 @@ const App = () => {
             render={() => <Login isLoggingIn={false}/>} />
           <>
             <Navbar isLoggedIn={ isLoggedIn } />
-            <Route exact path="/" component={ Landing } />
-            <Route exact path="/posts/:id" component={ SpecificBlog } />
-            <Route exact path="/posts" component={ Posts } />
-            <Route exact path="/create-post" component={ CreateBlog } />
+              <Route exact path="/" component={ Landing } />
+              <Route exact path="/posts/:id" component={ SpecificBlog } />
+              <Route exact path="/posts" component={ Posts } />
+              <Route exact path="/create-post" component={ CreateBlog } />
             <Footer isLoggedIn={ isLoggedIn } />
           </>
         </Switch>

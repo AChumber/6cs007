@@ -5,3 +5,48 @@
     padding: 1rem;
     text-align: center;
 }
+
+.specific-blog-container {
+    width: 75%;
+    margin: auto;
+    background-color: #FEFEFE;
+    padding: .25rem 0 .25rem 1rem ;
+    position: relative;
+    min-height: 80vh;
+    transition: width 0.15s ease-out;
+}
+.comments-btn {
+    position: fixed;
+    right: 3%;
+    margin-right: 1rem;
+    top: 50%;
+    transform: translate(3%, -50%);
+}
+.comments-on {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+.post {
+    flex-grow: 2;
+}
+.post-heading {
+    padding: 0 1rem;
+}
+.post-heading h1 {
+    font-size: var(--heading-font-size);
+}
+.post-heading :is(.post-author, .post-date) {
+    font-size: var(--small-font-size);
+    color: var(--greyed-out-color);
+}
+.post-body {
+    padding: .25rem 1rem;
+}
+
+
+.comments-container {
+    background-color: var(--bg-color);
+    width: 40%;
+    right: 0;
+}
