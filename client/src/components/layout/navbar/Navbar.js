@@ -14,9 +14,9 @@ const Navbar = ({ isLoggedIn }) => {
     );
     const loggedIn = (
         <>
-            <a href="#" className="navbar-link">Create new Blog</a>
-            <a href="#" className="navbar-link">My Blogs</a>
-            <a href="#" className="navbar-link navbar-button">Log Out</a>
+            <Link to="/create-post" className="navbar-link">Create new Blog</Link>
+            <Link to="my-posts" className="navbar-link">My Blogs</Link>
+            <Link to="/" className="navbar-link navbar-button">Log Out</Link>
         </>
     );
     return(

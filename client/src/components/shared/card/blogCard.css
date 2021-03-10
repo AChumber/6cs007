@@ -1,0 +1,35 @@
+.blog-card {
+    height: 35vh;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 5px;
+    padding: 0 1rem;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+.blog-card:hover {
+    transform: scale(1.01);
+    background-color: #FFFFFF;
+    border-color: rgba(0,0,0,.1);
+}
+.blog-card h6 {
+    font-size: 1.1rem;
+    margin: 0.8rem 0;
+}
+.blog-card p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: var(--body-font-size);
+    color: #4e4e4e;
+}
+.blog-card .post-author {
+    font-size: 0.7rem;
+    position: absolute;
+    bottom: 0%;
+    right: 5%;
+    transform: translate(-5%, -0%);
+    color: #929292;
+}

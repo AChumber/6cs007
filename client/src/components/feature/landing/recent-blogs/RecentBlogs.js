@@ -1,7 +1,7 @@
 //Child component to display recent blogs for Landing Page.
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import BlogCard from './BlogCard';
+import BlogCard from '../../../shared/card/BlogCard';
 import Loading from '../../../shared/loading/Loading';
 import './recentBlogs.css';
 

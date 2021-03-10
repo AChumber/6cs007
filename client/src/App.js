@@ -7,6 +7,8 @@ import { useState } from 'react';
 import SpecificBlog from './components/feature/specificBlog/SpecificBlog';
 import Posts from './components/feature/posts/Posts';
 import CreateBlog from './components/feature/createBlog/CreateBlog';
+import MyBlogs from './components/feature/myBlogs/MyBlogs';
+
 const App = () => {
   const[isLoggedIn, setIsLoggedIn] = useState(false);
   return(
@@ -25,6 +27,7 @@ const App = () => {
               <Route exact path="/posts/:id" component={ SpecificBlog } />
               <Route exact path="/posts" component={ Posts } />
               <Route exact path="/create-post" component={ CreateBlog } />
+              <Route exacy path="/my-posts" component={ MyBlogs } />
             <Footer isLoggedIn={ isLoggedIn } />
           </>
         </Switch>

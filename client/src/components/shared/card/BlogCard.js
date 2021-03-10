@@ -1,6 +1,6 @@
 //child Component - Recieve props and create the card
 import { useHistory } from 'react-router-dom';
-import './recentBlogs.css';
+import './blogCard.css';
 
 const BlogCard = ({ post }) => {
     const history = useHistory();

@@ -1,0 +1,83 @@
+.header-posts {
+    position: relative;
+}
+.header-posts hr {
+    width: 15%;
+    background-color: var(--secondary-color);
+    position: absolute;
+    left: 0;
+}
+.search-box {
+    width: 60%;
+    margin: 1rem auto;
+    position: relative;
+}
+.search-box input[type=text] {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+}
+.search-box button {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;  
+    position: absolute;
+    right: -5%;
+    top: 50%;
+    transform: translate(-5%, -50%);
+    display: inline-block;
+    padding: .4rem .8rem;
+    transition: all 0.15s ease-in-out;
+}
+.search-box button:hover {
+    background-color: var(--primary-hover-color);
+    cursor: pointer;
+}
+
+.show-amount {
+    margin-bottom: 1rem; 
+}
+.show-amount label {
+    color: #333333;
+    margin-right: .5rem;
+    font-size: 0.875rem;
+}
+.show-amount select {
+    font-size: 1rem;
+    padding: .1rem;
+}
+.post-results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.chevron {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+.chevron button {
+    border: none;
+    background: none;
+    display: block;
+}
+.chevron button img {
+    padding: .725rem;
+    transition: all 0.15s ease-in-out;
+} 
+.chevron button:hover {
+    cursor: pointer;
+}
+.chevron button:hover img {
+    background-color: #ebebeb;
+}
+
+/*Phone Size - Smaller text and box size*/
+@media only screen and (max-width: 488px){
+    .post-results-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

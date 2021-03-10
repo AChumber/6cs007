@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 const Footer = ({ isLoggedIn }) => {
     const signedIn = (
         <>
-            <li><a href="#">Account Settings</a></li>
-            <li><a href="#">Create a Blog</a></li>
-            <li><a href="#">Edit a Blog</a></li>
+            <li><Link to="/">Account Settings</Link></li>
+            <li><Link to="/create-post">Create a Blog</Link></li>
+            <li><Link to="/my-posts">Edit a Blog</Link></li>
         </>
     );
     const notSignedIn = (
