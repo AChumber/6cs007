@@ -35,11 +35,26 @@ router.post('/', verifyToken, async (req,res) => {
 //@DESC Gets all blogs in DB. Returns an array of objects.
 //@ACCESS Public
 router.get('/', async (req, res) => {
-    await Post.find({})
-        .then(blogs => {
-            return res.status(200).json({ blogs });
-        })
-        .catch(err => res.status(404).json({ msg: "Could not retrieve posts" }));
+    const offset = Number.parseInt(req.query.offset) || 0;
+    const limit = Number.parseInt(req.query.limit) || 0;
+    //If no query found return all documents retrieved
+    if(!offset && !limit){
+        await Post.find({})
+            .then(blogs => {
+                return res.status(200).json({ blogs });
+            })
+            .catch(err => {
+                return res.status(404).json({ msg: "Could not retrieve posts" });
+            });
+    } else {
+        await Post.find({}, null, { limit: limit, skip: offset })
+            .then(blogs => {
+                return res.status(200).json({ blogs });
+            })
+            .catch(err => {
+                return res.status(404).json({ msg: "Query version - Could not retrieve posts" })
+            });
+    }
 });
 
 //@GET blogPosts
