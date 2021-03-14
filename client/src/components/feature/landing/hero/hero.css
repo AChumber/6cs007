@@ -68,3 +68,20 @@
     transform: scale(1.01);
     color: #272727;
 }
+
+/*Phone Size - Smaller text and box size*/
+@media only screen and (max-width: 768px){
+    .hero-image {
+        height: 30vh;
+    }
+    .hero-text-wrapper {
+        position: relative;
+        flex-direction: column;
+    }
+    .left-text h1 {
+        font-size: 10px;
+    }
+    .left-text p {
+        font-size: 10px;
+    }
+}

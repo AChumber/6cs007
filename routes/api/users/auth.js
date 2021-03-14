@@ -15,7 +15,7 @@ router.post('/', async (req,res) => {
     //Find account from DB
     await User.findOne({ email })
         .then(user => {
-            if(!user) return res.status(400).json({ msg: "User does not exist" });
+            if(!user) return res.status(400).json({ msg: "Account does not exist" });
             bcrypt.compare(password, user.password)
             .then(isMatch => {
                 if(isMatch){

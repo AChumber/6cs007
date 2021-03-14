@@ -1,8 +1,11 @@
 import './navbar.css';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import Logo from '../../../assets/images/Logo.svg';
 
 const Navbar = ({ isLoggedIn }) => {
+    const [collapseNav, setCollapseNav] = useState(false);
+    
     const widthStyle = {
         width: (isLoggedIn ? 30: 15)+'%'
     }
