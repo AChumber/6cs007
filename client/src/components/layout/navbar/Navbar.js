@@ -1,11 +1,20 @@
 import './navbar.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Logo from '../../../assets/images/Logo.svg';
+import { UserContext } from '../../../context/UserContext';
 
 const Navbar = ({ isLoggedIn }) => {
     const [collapseNav, setCollapseNav] = useState(false);
+    const [user, setUser] = useContext(UserContext); 
     
+    const handleLogOut = () => {
+        //Remove user
+        setUser({
+            isLoggedIn: false
+        });
+    }
+
     const widthStyle = {
         width: (isLoggedIn ? 30: 15)+'%'
     }
@@ -19,7 +28,7 @@ const Navbar = ({ isLoggedIn }) => {
         <>
             <Link to="/create-post" className="navbar-link">Create new Blog</Link>
             <Link to="my-posts" className="navbar-link">My Blogs</Link>
-            <Link to="/" className="navbar-link navbar-button">Log Out</Link>
+            <Link to="/" className="navbar-link navbar-button" onClick={ handleLogOut }>Log Out</Link>
         </>
     );
     return(

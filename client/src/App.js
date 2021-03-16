@@ -8,33 +8,40 @@ import SpecificBlog from './components/feature/specificBlog/SpecificBlog';
 import Posts from './components/feature/posts/Posts';
 import CreateBlog from './components/feature/createBlog/CreateBlog';
 import MyBlogs from './components/feature/myBlogs/MyBlogs';
+import { UserContext } from './context/UserContext';
 
 const App = () => {
-  const[isLoggedIn, setIsLoggedIn] = useState(false);
-  return(
-    <div className="App">
-      <BrowserRouter>
+  //State used in context API
+  const [user, setUser] = useState({
+    isLoggedIn: false
+  });
 
-        
-        <Switch>
-          <Route exact path="/login" 
-            render={() => <Login isLoggingIn={true}/>} />
-          <Route exact path="/create-account" 
-            render={() => <Login isLoggingIn={false}/>} />
-          <>
-            <Navbar isLoggedIn={ isLoggedIn } />
-              <Route exact path="/" component={ Landing } />
-              <Route exact path="/posts/:id" component={ SpecificBlog } />
-              <Route exact path="/posts" component={ Posts } />
-              <Route exact path="/create-post" component={ CreateBlog } />
-              <Route exacy path="/my-posts" component={ MyBlogs } />
-            <Footer isLoggedIn={ isLoggedIn } />
-          </>
-        </Switch>
-        
-        
-      </BrowserRouter>
-    </div>
+  return(
+    <UserContext.Provider value={[user, setUser]}>
+      <div className="App">
+        <BrowserRouter>
+
+          
+          <Switch>
+            <Route exact path="/login" 
+              render={() => <Login isLoggingIn={true}/>} />
+            <Route exact path="/create-account" 
+              render={() => <Login isLoggingIn={false}/>} />
+            <>
+              <Navbar isLoggedIn={ user.isLoggedIn } />
+                <Route exact path="/" component={ Landing } />
+                <Route exact path="/posts/:id" component={ SpecificBlog } />
+                <Route exact path="/posts" component={ Posts } />
+                <Route exact path="/create-post" component={ CreateBlog } />
+                <Route exacy path="/my-posts" component={ MyBlogs } />
+              <Footer isLoggedIn={ user.isLoggedIn } />
+            </>
+          </Switch>
+          
+          
+        </BrowserRouter>
+      </div>
+    </UserContext.Provider>
   );
 }
 

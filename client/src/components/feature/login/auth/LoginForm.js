@@ -1,13 +1,15 @@
 //child class for login section. Handles the login
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../../../../context/UserContext';
 
-const LoginForm = ({ changePage }) => {
+const LoginForm = ({ changePage, history }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isEmptyEmail, setIsEmptyEmail] = useState(false);
     const [isEmptyPassword, setIsEmptyPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [isShowSuccess, setIsShowSuccess] = useState(false);
+    const [user, setUser] = useContext(UserContext); //Get context to set user
     const errorBorderStyle = { border: "1px solid red" };
 
     const handleSubmit = async (e) =>{
@@ -36,6 +38,16 @@ const LoginForm = ({ changePage }) => {
             setPassword('');
 
             //Redirect user to home page after storing JWT and user credentials to Global Context API
+            //Set context
+            setUser(prevState => ({
+                ...prevState,
+                isLoggedIn: true,
+                token: jsonRes.accessToken,
+                email: jsonRes.user.email,
+                firstName: jsonRes.user.firstName,
+                surname: jsonRes.user.surname,
+                _id: jsonRes.user._id
+            }));
             history.push('/');
         }
     }

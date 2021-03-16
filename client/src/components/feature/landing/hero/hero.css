@@ -29,6 +29,17 @@
 .left-text h1 {
     font-size: var(--heading-font-size);
 }
+.left-text h2 {
+    font-size: var(--heading-font-size);
+    font-weight: 500;
+    background: linear-gradient(#333333, #284B63);
+    background: -webkit-linear-gradient(#333333, #284B63);
+    background: -moz-linear-gradient(#333333, #284B63);
+    background: -o-linear-gradient(#333333, #284B63);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
 .left-text p {
     font-size: var(--body-font-size);
 }

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../../../../context/UserContext';
 
 const CreateAccount = ({ changePage, history }) => {
     const [email, setEmail] = useState('');
@@ -10,6 +11,7 @@ const CreateAccount = ({ changePage, history }) => {
     const [emptyInputs, setEmptyInputs] = useState(false);
     const [errorMessage, setErrorMessage] = useState(''); //Get error from response to server
     const [showSuccess, setShowSuccess] = useState(false);
+    const [user, setUser] = useContext(UserContext); //Get context to set user
     const errorBorderStyle = { border: "1px solid red" };
 
     const handleSubmit = async e => {
@@ -48,6 +50,16 @@ const CreateAccount = ({ changePage, history }) => {
             setReEnterPass('');
 
             //Redirect user to home page after storing JWT and user credentials to Global Context API
+            //Set context
+            setUser(prevState => ({
+                ...prevState,
+                isLoggedIn: true,
+                token: jsonRes.accessToken,
+                email: jsonRes.user.email,
+                firstName: jsonRes.user.firstName,
+                surname: jsonRes.user.surname,
+                _id: jsonRes.user._id
+            }));
             history.push('/');
         }
     }

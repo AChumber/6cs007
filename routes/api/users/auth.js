@@ -26,7 +26,8 @@ router.post('/', async (req,res) => {
                 
                     return res.status(200).json({
                         msg: "Correct details",
-                        accessToken: jwtToken
+                        accessToken: jwtToken,
+                        user: user
                     });
                 } 
                 return res.status(400).json({ msg: "Invalid email or password" });

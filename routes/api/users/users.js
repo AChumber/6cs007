@@ -43,7 +43,8 @@ router.post('/', async (req, res) => {
                                 
                                 return res.status(200).json({ 
                                     msg: "Account Created",
-                                    accessToken: jwtToken
+                                    accessToken: jwtToken,
+                                    user: user
                                 });
                             })
                             .catch(err => {
