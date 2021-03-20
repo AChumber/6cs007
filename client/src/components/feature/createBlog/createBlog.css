@@ -19,7 +19,7 @@
 .create-form {
     padding: 1rem 0;
     margin-top: .5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 .form-group {
     display: flex;
@@ -43,7 +43,7 @@
     justify-content: space-between;
     align-content: center;
 }
-.form-group-btn :is(button, a) {
+.form-group-btn :is(button, a, h5) {
     padding: .4rem .8rem;
     border-radius: 5px;
     font-size: .875rem;
@@ -73,7 +73,35 @@
     transform: scale(1.1);
     border-radius: 0;
 }
-
+/* Modals */
+.modal {
+    padding: 0.1rem 1rem;
+    text-align: center;
+}
+.empty-fields-modal {
+    border: 1px solid red;
+    background-color: rgb(255, 251, 251);
+    margin: .5rem auto;
+    width: 90%;
+}
+.success-text {
+    color: green;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(249, 255, 249);
+    border: 1px solid green;
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+}
+.success-text h5 {
+    text-align: center;
+    font-size: 18px;
+}
+.success-text p {
+    font-size: 16px;
+}
 /*Phone Size - Smaller text and box size*/
 @media only screen and (max-width: 768px){
     

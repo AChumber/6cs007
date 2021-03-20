@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Post = require('../../../models/post');
+const { Post, Comment } = require('../../../models/post');
 const verifyToken = require('../users/auth.js').verifyToken;  //Get token verification
 
 //@POST blogPosts
@@ -31,6 +31,24 @@ router.post('/', verifyToken, async (req,res) => {
         });    
 });
 
+//@POST myPosts
+//@DESC Return all blogs that are authored by the email passed(unique)
+//@ACCESS Public - Need to be logged in
+router.post('/my-posts', verifyToken, async (req, res) => {
+    const { authorEmail } = req.body;
+
+    //Validate if body of req is valid
+    if(!authorEmail){
+        return res.status(400).json({ msg: "Enter all fields" });
+    }
+    //Find all posts by email passed
+    await Post.find({ authorEmail })
+        .then(blogs => {
+            return res.status(200).json({ blogs });
+        })
+        .catch(err => res.status(400).json({ msg: "Could not retrieve recent posts" }));
+});
+
 //@GET blogPosts
 //@DESC Gets all blogs in DB. Returns an array of objects.
 //@ACCESS Public
@@ -52,16 +70,16 @@ router.get('/', async (req, res) => {
                 return res.status(200).json({ blogs });
             })
             .catch(err => {
-                return res.status(404).json({ msg: "Query version - Could not retrieve posts" })
+                return res.status(404).json({ msg: "Could not retrieve posts" })
             });
     }
 });
 
 //@GET blogPosts
-//@DESC Gets 5 most recent blogs in DB. Returns an array of objects.
+//@DESC Gets 3 most recent blogs in DB. Returns an array of objects.
 //@ACCESS Public
 router.get('/mostrecent', async (req, res) => {
-    await Post.find().sort({ posted: -1 }).limit(5)
+    await Post.find().sort({ posted: -1 }).limit(3)
         .then(blogs => {
             return res.status(200).json({ blogs });
         })
@@ -121,8 +139,22 @@ router.put('/:id', verifyToken, async (req, res) => {
 //@DESC Adds a new comment to post in DB with specified id in req.
 //      Will verify with middleware 
 //@ACCESS Public - Need to be logged in
-router.put('/comment/:id', (req, res) => {
-
+router.put('/comment/:id', async (req, res) => {
+    const { commentAuthor, commentBody } = req.body;
+    const postId = req.params.id;
+    const comment = new Comment({
+        commentAuthor, 
+        commentBody
+    });
+    //Push the comment model created to the blog post
+    await Post.findByIdAndUpdate({ _id: postId }, { $push: { comments: comment } })
+        .then(blog => {
+            if(!blog) {
+                return res.status(404).json({ msg: "Blog Post not found. Could not add comment" });
+            }
+            return res.status(200).json({ msg: "Commented added to blog", blog })
+        })
+        .catch(err => res.status(400).json({ msg: "Comment Could not be added to the blog post" }));
 });
 
 module.exports = router;

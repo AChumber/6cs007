@@ -1,41 +1,138 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { Link, Redirect } from 'react-router-dom'; 
+import { UserContext } from '../../../context/UserContext';
+import { errorBorderStyle, errorTextColor } from '../../shared/ErrorStyles';
 import './createBlog.css';
+
 
 //Form component to create a new blog
 const CreateBlog = () => {
-    const [title, setTitle] = useState("");
-    const [desc, setDesc] = useState("");
-    const [body, setBody] = useState("");
+    const [formInputs, setFormInputs] = useState({
+        title: '',
+        description: '',
+        body: ''
+    });
+    const [emptyField, setEmptyField] = useState({
+        title: false,
+        description: false,
+        body: false
+    });
+    const [modals, setModals] = useState({
+        emptyFieldsModal: false,
+        successModal: false
+    });
+    const [errMessage, setErrMessage] = useState('');
+    const [isRedirect, setIsRedirect] = useState(false);
+    const [user] = useContext(UserContext);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        //Validate if fields are empty or not
+        if(!formInputs.title || !formInputs.body || !formInputs.description) {
+            setModals(prevState => ({ ...prevState, emptyFieldsModal: !prevState.emptyFieldsModal }));
+            return null;
+        } 
+        
+        //Fetch
+        const submitOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'authorisation': user.token
+            },
+            body: JSON.stringify({
+                authorEmail: user.email,
+                postTitle: formInputs.title,
+                postDesc: formInputs.description,
+                postBody: formInputs.body
+            })
+        }
+        const response = await fetch('api/blogpost/', submitOptions);
+        if(!response.ok){
+            console.log('Response Recieved not ok');
+        }
+        const jsonRes = await response.json();
+        if(response.status === 200){
+            setModals(prevState => ({ ...prevState, successModal: !prevState.successModal, emptyFieldsModal: false }));
+            setTimeout(()=>{
+                setIsRedirect(true);
+            }, 2000)
+        } else{ 
+            setErrMessage(jsonRes.msg);
+        }
+    }
+
+    //Change state for field when user types
+    const handleChange = (e) => {
+        setFormInputs(prevState => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }));
+    }
+
+    //Check if user leaves focus of an input without entering a value
+    const handleOnBlur = (e) => {
+        setEmptyField(prevState => ({
+            ...prevState,
+            [e.target.name]: !e.target.value
+        }));
+    }
 
     return(
         <section className="content-section">
+            {isRedirect && <Redirect to='/my-posts'/>}
             <div className="header">
                 <h1>Create a new Blog</h1>
                 <p>Fill in the fields to publish your new blog.</p>
                 <hr />
             </div>
-            <form className="create-form">
+            {
+                modals.emptyFieldsModal && (
+                    <div className="empty-fields-modal modal">
+                        {!errMessage ? 
+                            <h5>Please enter all fields before submitting</h5>
+                            : <h5>{errMessage}</h5>
+                        }
+                    </div>
+                )
+            }
+            <form className="create-form" onSubmit={ handleSubmit }>
                 <div className="form-group">
                     <label htmlFor="title">Enter new Blog Title:</label>
-                    <input type="text" name="title" placeholder="Blog Title..."
-                        onChange={ (e)=> setTitle(e.target.value) }/>
+                    <input type="text" name="title" placeholder="Blog Title..." value={ formInputs.title }
+                        onChange={ handleChange } onBlur={ handleOnBlur }
+                        style={ emptyField.title ? errorBorderStyle : null } />
+                    { emptyField.title && <small style={errorTextColor}>Please enter the Post's Title</small> }
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Enter Blog Description:</label>
                     <small>The description will be shown when people look at all blog posts!</small>
-                    <input type="text" name="description" placeholder="Blog Description..."
-                        onChange={ (e)=> setDesc(e.target.value) }/>
+                    <input type="text" name="description" placeholder="Blog Description..." 
+                        value={ formInputs.description } onChange={ handleChange } onBlur={ handleOnBlur }
+                        style={ emptyField.description ? errorBorderStyle : null } />
+                    { emptyField.description && <small style={errorTextColor}>Please enter the Post's Description</small> }
                 </div>
                 <div className="form-group">
                     <label htmlFor="body">Enter new Blog content:</label>
-                    <textarea type="text" name="body"
-                        placeholder="Blog Content..." rows="10" onChange={ (e)=>setBody(e.target.value) }></textarea>
+                    <textarea type="text" name="body" value={ formInputs.body }
+                        placeholder="Blog Content..." rows="10" onChange={ handleChange }
+                        onBlur={ handleOnBlur } style={ emptyField.body ? errorBorderStyle : null }></textarea>
+                    { emptyField.body && <small style={errorTextColor}>Please enter the Post's Content</small> }
                 </div>
                 <div className="form-group-btn">
-                    <button>Post Blog</button>
+                    <button type="submit">Post Blog</button>
                     <Link to="/">Cancel</Link>
+                    
                 </div>
+                {
+                    modals.successModal &&
+                    (
+                        <div className="success-text">
+                            <h5>&#10003; - Your Blog has been posted!</h5>
+                            <p>You will automatically be redirected to your posts. <Link to="/my-posts">Click here</Link> if you havent</p>
+                        </div>
+                    )
+                }
             </form>
         </section>
     );

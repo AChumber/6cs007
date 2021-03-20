@@ -1,6 +1,8 @@
 //child class for login section. Handles the login
 import { useState, useContext } from 'react';
 import { UserContext } from '../../../../context/UserContext';
+import { errorBorderStyle, errorTextColor } from '../../../shared/ErrorStyles';
+import Spinner from '../../../shared/spinner/Spinner';
 
 const LoginForm = ({ changePage, history }) => {
     const [email, setEmail] = useState('');
@@ -9,14 +11,16 @@ const LoginForm = ({ changePage, history }) => {
     const [isEmptyPassword, setIsEmptyPassword] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [isShowSuccess, setIsShowSuccess] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(false);
     const [user, setUser] = useContext(UserContext); //Get context to set user
-    const errorBorderStyle = { border: "1px solid red" };
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
+        setShowSpinner(true);
         //Ensure Validation
         if(!email || !password){
             !email ? setIsEmptyEmail(true) : (!password && setIsEmptyPassword(true));
+            setShowSpinner(false);
         }
         //Set options for api call
         const authOptions = {
@@ -50,6 +54,7 @@ const LoginForm = ({ changePage, history }) => {
             }));
             history.push('/');
         }
+        setShowSpinner(false);
     }
 
     //Method to ensure form validation is shown to the user
@@ -72,7 +77,7 @@ const LoginForm = ({ changePage, history }) => {
                         value={ email } onChange={ e => setEmail(e.target.value) }
                         onBlur={ handleBlur }
                         style={isEmptyEmail ? errorBorderStyle: null} />
-                    { isEmptyEmail && <small className="error-text">Please enter an email</small> }
+                    { isEmptyEmail && <small style={errorTextColor}>Please enter an email</small> }
                 </div>
                 <div className="form-input">
                     <label htmlFor="password">Password:</label>
@@ -80,10 +85,12 @@ const LoginForm = ({ changePage, history }) => {
                         value={ password } onChange={ e => setPassword(e.target.value) }
                         onBlur={ handleBlur }
                         style={isEmptyPassword ? errorBorderStyle: null} />
-                    { isEmptyPassword && <small className="error-text">Please enter a Password</small> }
+                    { isEmptyPassword && <small style={errorTextColor}>Please enter a Password</small> }
                 </div>
                 <p>Don't have an Account? <span className="form-span" onClick={ changePage }>Create one here.</span></p>
-                <button type="submit">Log In</button>
+                <button type="submit">
+                    {showSpinner ? <Spinner /> : 'Log In'}
+                </button>
                 {
                     errorMessage && (
                         <div className="error-response">

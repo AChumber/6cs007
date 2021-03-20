@@ -97,9 +97,6 @@
 .form-container button:hover {
     background-color: #1d3747;
 }
-.error-text {
-    color: red;
-}
 .empty-inputs {
     background-color: #fff1f1;
     width: 50%;

@@ -33,7 +33,7 @@ const Hero = () => {
                 </div>
                 <div className="right-buttons">
                     <Link to="/create-post">Create my Blog</Link>
-                    <Link to="/create-account">Create Account</Link>
+                    { isLoggedIn ?  LoggedInBtn : <Link to="/create-account">Create Account</Link>}
                 </div>
             </div>
         </div>

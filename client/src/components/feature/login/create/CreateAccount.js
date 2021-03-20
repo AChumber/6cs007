@@ -1,5 +1,6 @@
 import { useState, useContext } from 'react';
 import { UserContext } from '../../../../context/UserContext';
+import { errorBorderStyle, errorTextColor } from '../../../shared/ErrorStyles';
 
 const CreateAccount = ({ changePage, history }) => {
     const [email, setEmail] = useState('');
@@ -12,7 +13,6 @@ const CreateAccount = ({ changePage, history }) => {
     const [errorMessage, setErrorMessage] = useState(''); //Get error from response to server
     const [showSuccess, setShowSuccess] = useState(false);
     const [user, setUser] = useContext(UserContext); //Get context to set user
-    const errorBorderStyle = { border: "1px solid red" };
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -100,7 +100,7 @@ const CreateAccount = ({ changePage, history }) => {
                         <label htmlFor="firstName">First Name:</label>
                         <input type="text" name="firstName" placeholder="Enter First Name..."
                             onChange={e => setFirstName(e.target.value)}
-                            style={emptyInputs && !firstName ? errorBorderStyle: null}/>
+                            style={(emptyInputs && !firstName) ? errorBorderStyle: null}/>
                     </div>
                     <div className="form-input">
                         <label htmlFor="surname">Surname:</label>
@@ -126,7 +126,7 @@ const CreateAccount = ({ changePage, history }) => {
                         onChange={e => setReEnterPass(e.target.value)}
                         onBlur={e => handleOnBlur(e) }
                         style={passwordMatchErr ? errorBorderStyle: null} />
-                    { passwordMatchErr && <small className="error-text">Password's Must Match</small> }
+                    { passwordMatchErr && <small style={errorTextColor}>Password's Must Match</small> }
                 </div>
                 <p>Already have an Account? <span className="form-span" onClick={ changePage }>Log In here.</span></p>
                 <button type="submit" className="create-account-btn">Create my Account</button>

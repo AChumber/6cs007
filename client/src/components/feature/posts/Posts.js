@@ -2,24 +2,33 @@ import { useState, useEffect } from 'react';
 import BlogCard from '../../shared/card/BlogCard';
 import './posts.css'
 import Chevron from '../../../assets/images/Chevron.svg';
+import Loading from '../../shared/loading/Loading';
 
 //Component that renders all blog posts on the website
 const Posts = () => {
     const [posts, setPosts] = useState([]);
     const [limit, setLimit] = useState(10);
     const [isLoading, setisLoading] = useState(true);
+    const [errMessage, setErrMessage] = useState('');
 
     useEffect(() => {
         fetchData(); 
     }, [])
 
-    //Fetch Data from enpoint. Specifying limit and start based of component state
+    //Fetch Data from endpoint. Specifying limit and start based of component state
     const fetchData = () => {
         setisLoading(true);
-        fetch(`https://jsonplaceholder.typicode.com/posts?_start=${posts.length}&_limit=${limit}`)
+        fetch(`/api/blogpost/?offset=${posts.length}&limit=${limit}`)
             .then(res => res.json())
             .then(resJson => {
-                setPosts([...posts, ...resJson]);
+                if(resJson.status === 404) {
+                    setErrMessage(resJson.msg);
+                } else{
+                    //Check length of blogs and set error as there are no more to search
+                    resJson.blogs.length === 0 ? 
+                        setErrMessage('No More Blog Posts.') :
+                        setPosts([...posts, ...resJson.blogs])
+                }
                 setisLoading(false);
             });        
     }
@@ -51,14 +60,19 @@ const Posts = () => {
             </div>
             <div className="post-results-grid">
                 {  
-                    posts.map(post => <BlogCard key={post.id} post={post} />) 
+                    isLoading ? <Loading /> : posts.map(post => <BlogCard key={post._id} post={post} />) 
                 }
             </div>
-            <div className="chevron">
-                <button onClick={ () => fetchData() }>
-                    <img src={Chevron} />
-                </button>
-            </div>
+            {!errMessage ?
+                (<div className="chevron">
+                    <button onClick={ () => fetchData() }>
+                        <img src={Chevron} />
+                    </button>
+                </div>) :
+                (<div className="error-message">
+                    <h5>{ errMessage }</h5>
+                </div>)
+            }
         </section>
     )
 };

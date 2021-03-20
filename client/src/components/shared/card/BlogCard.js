@@ -6,10 +6,10 @@ const BlogCard = ({ post }) => {
     const history = useHistory();
 
     return(
-        <div className="blog-card" onClick={ () => history.push(`/posts/${post.id}`) }>
-            <h6>{ post.title }</h6>
-            <p>{ post.body }</p>
-            <p className="post-author">{ post.userId } | id: { post.id }</p>
+        <div className="blog-card" onClick={ () => history.push(`/posts/${post._id}`) }>
+            <h6>{ post.postTitle }</h6>
+            <p>{ post.postDesc }</p>
+            <p className="post-author">{ post.authorEmail }</p>
         </div>
     );
 };

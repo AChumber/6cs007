@@ -16,10 +16,11 @@ const Navbar = ({ isLoggedIn }) => {
     }
 
     const widthStyle = {
-        width: (isLoggedIn ? 30: 15)+'%'
+        width: (isLoggedIn ? 40: 30)+'%'
     }
     const notloggedIn = (
         <>
+            <Link to="/posts" className="navbar-link">Search posts</Link>
             <Link to="/login" className="navbar-link">Login</Link>
             <Link to="/create-account" className="navbar-link navbar-button">Sign Up</Link>
         </>

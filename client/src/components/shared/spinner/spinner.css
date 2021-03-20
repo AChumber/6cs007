@@ -1,0 +1,30 @@
+.circle {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 3px solid #333333;
+    border-top: 3px solid var(--primary-color);
+    position: relative;
+    animation: spin 2s linear infinite;
+    margin: auto;
+}
+.inner {
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    border: 3px solid #DDDDDD;
+    border-left: 3px solid var(--secondary-color);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}

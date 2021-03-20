@@ -20,7 +20,6 @@ const App = () => {
     <UserContext.Provider value={[user, setUser]}>
       <div className="App">
         <BrowserRouter>
-
           
           <Switch>
             <Route exact path="/login" 
@@ -37,7 +36,6 @@ const App = () => {
               <Footer isLoggedIn={ user.isLoggedIn } />
             </>
           </Switch>
-          
           
         </BrowserRouter>
       </div>
