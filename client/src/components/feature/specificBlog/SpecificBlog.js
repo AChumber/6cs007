@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../../shared/loading/Loading';
-import Comments from './Comments';
+import Comments from './comments/Comments';
 import NoPost from './NoPost';
 import "./specificBlog.css";
 
@@ -13,12 +13,11 @@ const SpecificBlog = () => {
     const [isShowComments, setIsShowComments] = useState(false);
     
     useEffect(() => {
-        fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        fetch(`/api/blogpost/${id}`)
             .then(res => res.json())
             .then(jsonRes => {
-                setPost(jsonRes);
+                setPost(jsonRes.blog);
                 setIsLoading(false);
-                console.log(post);
             })
             .catch(err => console.log(err));
     }, []);
@@ -27,6 +26,16 @@ const SpecificBlog = () => {
         setIsShowComments(!isShowComments);
     };
 
+    const updateCommentsArray = (commentObj) => {
+        if(!commentObj) { return null }
+        setPost(prevState => (
+            {
+                ...prevState,
+                comments: [...prevState.comments, commentObj]
+            }
+        ))
+    }
+
     return(
         <>
             {isLoading ? <Loading /> :
@@ -34,17 +43,17 @@ const SpecificBlog = () => {
                 <section className={ "specific-blog-container " +(isShowComments && "comments-on") } >
                     <div className="post">
                         <div className="post-heading">
-                            <h1>{ post.title }</h1>
-                            <p className="post-author">by { post.userId }</p>
-                            <p className="post-date">Posted on: --th Jan 2020</p> 
+                            <h1>{ post.postTitle }</h1>
+                            <p className="post-author">by { post.authorEmail }</p>
+                            <p className="post-date">Posted on: { new Date(post.posted).toDateString() }</p> 
                             <hr />
                         </div>
                         <div className="post-body">
-                            <p>{ post.body }</p>
+                            <p>{ post.postBody }</p>
                         </div>
                     </div>
 
-                    { isShowComments ? <Comments postId={ id } toggleOff={ toggleComments } /> : (
+                    { isShowComments ? <Comments postId={ id } toggleOff={ toggleComments } comments={post.comments} updateCommentsArray={ updateCommentsArray } /> : (
                         <button className="comments-btn" 
                             onClick={ () => toggleComments() }>Comments</button>) }
                 </section>

@@ -91,11 +91,11 @@ router.get('/mostrecent', async (req, res) => {
 //@ACCESS Public
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
-    await Post.find({ _id: id })
+    await Post.findById(id)
         .then(blog => {
             return res.status(200).json({ blog });
         })
-        .catch(err => res.status(404).json({ msg: "Could not find Post" }));
+        .catch(err => res.status(404).json({ msg: "Could not find Post", blog:{} }));
 });
 
 
@@ -139,22 +139,23 @@ router.put('/:id', verifyToken, async (req, res) => {
 //@DESC Adds a new comment to post in DB with specified id in req.
 //      Will verify with middleware 
 //@ACCESS Public - Need to be logged in
-router.put('/comment/:id', async (req, res) => {
-    const { commentAuthor, commentBody } = req.body;
-    const postId = req.params.id;
+router.post('/comment', async (req, res) => {
+    const { commentAuthor, commentBody, postId } = req.body;
     const comment = new Comment({
         commentAuthor, 
         commentBody
     });
     //Push the comment model created to the blog post
-    await Post.findByIdAndUpdate({ _id: postId }, { $push: { comments: comment } })
+    await Post.findByIdAndUpdate({ _id: postId }, 
+        { $push: { comments: comment } },
+        { new: true, safe: true, upsert: true })
         .then(blog => {
             if(!blog) {
                 return res.status(404).json({ msg: "Blog Post not found. Could not add comment" });
             }
-            return res.status(200).json({ msg: "Commented added to blog", blog })
+            return res.status(200).json({ msg: "Commented added to blog", comment });
         })
-        .catch(err => res.status(400).json({ msg: "Comment Could not be added to the blog post" }));
+        .catch(err => res.status(400).json({ msg: "Comment Could not be added to the blog post", err }));
 });
 
 module.exports = router;
