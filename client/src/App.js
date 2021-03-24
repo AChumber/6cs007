@@ -9,6 +9,7 @@ import Posts from './components/feature/posts/Posts';
 import CreateBlog from './components/feature/createBlog/CreateBlog';
 import MyBlogs from './components/feature/myBlogs/MyBlogs';
 import { UserContext } from './context/UserContext';
+import ProtectedRoute from './components/shared/ProtectedRoute';
 
 const App = () => {
   //State used in context API
@@ -31,8 +32,8 @@ const App = () => {
                 <Route exact path="/" component={ Landing } />
                 <Route exact path="/posts/:id" component={ SpecificBlog } />
                 <Route exact path="/posts" component={ Posts } />
-                <Route exact path="/create-post" component={ CreateBlog } />
-                <Route exacy path="/my-posts" component={ MyBlogs } />
+                <ProtectedRoute exact path="/create-post" component={ CreateBlog } />
+                <ProtectedRoute exacy path="/my-posts" component={ MyBlogs } />
               <Footer isLoggedIn={ user.isLoggedIn } />
             </>
           </Switch>
