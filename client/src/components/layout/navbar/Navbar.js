@@ -28,7 +28,7 @@ const Navbar = ({ isLoggedIn }) => {
     const loggedIn = (
         <>
             <Link to="/create-post" className="navbar-link">Create new Blog</Link>
-            <Link to="my-posts" className="navbar-link">My Blogs</Link>
+            <Link to="/my-posts" className="navbar-link">My Blogs</Link>
             <Link to="/" className="navbar-link navbar-button" onClick={ handleLogOut }>Log Out</Link>
         </>
     );

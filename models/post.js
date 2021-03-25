@@ -11,6 +11,7 @@ const postSchema = new mongoose.Schema({
     postTitle: { type: String, required: true },
     postDesc: { type: String },
     postBody: { type: String, required: true },
+    postImgUrl: { type: String },
     posted: { type: Date, required: true, default: Date.now },
     comments: { 
         type: [commentSchema],

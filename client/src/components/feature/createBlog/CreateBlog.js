@@ -10,7 +10,8 @@ const CreateBlog = () => {
     const [formInputs, setFormInputs] = useState({
         title: '',
         description: '',
-        body: ''
+        body: '',
+        imageFile: ''
     });
     const [emptyField, setEmptyField] = useState({
         title: false,
@@ -25,6 +26,29 @@ const CreateBlog = () => {
     const [isRedirect, setIsRedirect] = useState(false);
     const [user] = useContext(UserContext);
 
+    //Upload image to cloudify
+    const handleImageUpload = async () => {
+        var imageUrl = '';
+        //Check if file has been uploaded then upload
+        if(formInputs.imageFile){
+            const cloudName = "dzttizwyd";
+            let formData = new FormData();
+            formData.append("file", formInputs.imageFile);
+            formData.append("upload_preset", "leyyka54")
+            await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+                {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.json())
+                .then(data => {
+                    imageUrl = data.url;
+                })
+                .catch(err => console.log(err.message));
+        }
+        return imageUrl;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         //Validate if fields are empty or not
@@ -32,6 +56,9 @@ const CreateBlog = () => {
             setModals(prevState => ({ ...prevState, emptyFieldsModal: !prevState.emptyFieldsModal }));
             return null;
         } 
+
+        //Upload image file to cloudify and return url to image
+        const imagePath = await handleImageUpload();
         
         //Fetch
         const submitOptions = {
@@ -44,7 +71,8 @@ const CreateBlog = () => {
                 authorEmail: user.email,
                 postTitle: formInputs.title,
                 postDesc: formInputs.description,
-                postBody: formInputs.body
+                postBody: formInputs.body,
+                postImgUrl: imagePath
             })
         }
         const response = await fetch('api/blogpost/', submitOptions);
@@ -118,6 +146,14 @@ const CreateBlog = () => {
                         placeholder="Blog Content..." rows="10" onChange={ handleChange }
                         onBlur={ handleOnBlur } style={ emptyField.body ? errorBorderStyle : null }></textarea>
                     { emptyField.body && <small style={errorTextColor}>Please enter the Post's Content</small> }
+                </div>
+                <div className="form-group">
+                    <label htmlFor="imageFile">Choose an image to go along with the blog:</label>
+                    <input type="file" name="imageFile"
+                        onChange={ e => setFormInputs(prevState => ({
+                            ...prevState,
+                            imageFile: e.target.files[0]
+                        })) } />
                 </div>
                 <div className="form-group-btn">
                     <button type="submit">Post Blog</button>

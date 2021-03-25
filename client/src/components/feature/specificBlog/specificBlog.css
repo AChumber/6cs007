@@ -33,12 +33,34 @@
 }
 .post-heading {
     padding: 0 1rem;
+    position: relative;
 }
 .post-heading h1 {
     font-size: var(--heading-font-size);
 }
 .post-heading :is(.post-author, .post-date) {
     font-size: var(--small-font-size);
+    color: var(--greyed-out-color);
+}
+.post-image {
+    width: 90%;
+    margin: auto;
+}
+.img-relative {
+    position: absolute;
+    width: 50%;
+    top: 100%;
+    left: 0;
+    transform: translate(-0%, -100%);
+    padding: .5rem 1rem;
+    margin-top: 1rem;
+    background-color: #FEFEFE;
+}
+.post-desc {
+    background-color: #fcfcfc;
+}
+.post-desc p {
+    text-align: center;
     color: var(--greyed-out-color);
 }
 .post-body {

@@ -6,7 +6,7 @@ const verifyToken = require('../users/auth.js').verifyToken;  //Get token verifi
 //@DESC Create a new post document in the DB.
 //@ACCESS Public - Need to be logged in
 router.post('/', verifyToken, async (req,res) => {
-    const { authorEmail, postTitle, postDesc, postBody } = req.body;
+    const { authorEmail, postTitle, postDesc, postBody, postImgUrl } = req.body;
 
     //Validate if body of req is valid
     if(!authorEmail || !postTitle || !postBody){
@@ -18,7 +18,8 @@ router.post('/', verifyToken, async (req,res) => {
         authorEmail,
         postTitle,
         postDesc,
-        postBody
+        postBody,
+        postImgUrl
     });
 
     //Save blog post to DB
@@ -27,6 +28,7 @@ router.post('/', verifyToken, async (req,res) => {
             return res.status(200).json({ msg: "Blog Post posted", blog });
         })
         .catch(err => {
+            console.log(err);
             return res.status(400).json({ msg: "Could not create post" });
         });    
 });

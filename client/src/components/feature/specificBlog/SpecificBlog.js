@@ -43,10 +43,16 @@ const SpecificBlog = () => {
                 <section className={ "specific-blog-container " +(isShowComments && "comments-on") } >
                     <div className="post">
                         <div className="post-heading">
-                            <h1>{ post.postTitle }</h1>
-                            <p className="post-author">by { post.authorEmail }</p>
-                            <p className="post-date">Posted on: { new Date(post.posted).toDateString() }</p> 
-                            <hr />
+                            { post.postImgUrl && <img class="post-image" src={ post.postImgUrl } alt={ post.postTitle }/> }
+                            <div className={post.postImgUrl ? "post-heading-wrapper img-relative" : "post-heading-wrapper"}>
+                                <h1>{ post.postTitle }</h1>
+                                <p className="post-author">by { post.authorEmail }</p>
+                                <p className="post-date">Posted on: { new Date(post.posted).toDateString() }</p> 
+                                <hr />
+                            </div>
+                        </div>
+                        <div className="post-desc">
+                            <p><i>{ post.postDesc }</i></p>
                         </div>
                         <div className="post-body">
                             <p>{ post.postBody }</p>
