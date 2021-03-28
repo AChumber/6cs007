@@ -3,22 +3,34 @@ import { UserContext } from '../../../../context/UserContext';
 import { errorBorderStyle, errorTextColor } from '../../../shared/ErrorStyles';
 
 const CreateAccount = ({ changePage, history }) => {
-    const [email, setEmail] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [password, setPassword] = useState('');
-    const [reEnterPass, setReEnterPass] = useState('');
+    const [formData, setFormData] = useState({
+        email: '',
+        firstName: '',
+        surname: '',
+        password: '',
+        reEnterPass: ''
+    });
+    const [emptyInputs, setEmptyInputs] = useState({
+        email: false,
+        firstName: false,
+        surname: false,
+        password: false
+    });
     const [passwordMatchErr, setPasswordMatchErr] = useState(false);
-    const [emptyInputs, setEmptyInputs] = useState(false);
     const [errorMessage, setErrorMessage] = useState(''); //Get error from response to server
     const [showSuccess, setShowSuccess] = useState(false);
-    const [user, setUser] = useContext(UserContext); //Get context to set user
+    const [, setUser] = useContext(UserContext); //Get context to set user
 
     const handleSubmit = async e => {
         e.preventDefault();
         //Validate for no empty fields
-        if(!email || !firstName || !surname){
-            setEmptyInputs(true);
+        if(!formData.email || !formData.firstName || !formData.surname){
+            setEmptyInputs({
+                email: !formData.email ? true: false,
+                firstName: !formData.firstName ? true: false,
+                surname: !formData.surname ? true: false,
+                password: !formData.password ? true: false
+            });
             return null;
         }
         setEmptyInputs(false);
@@ -30,10 +42,10 @@ const CreateAccount = ({ changePage, history }) => {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                email,
-                password,
-                firstName,
-                surname
+                email: formData.email,
+                password: formData.password,
+                firstName: formData.firstName,
+                surname: formData.surname
             })
         };
         const response = await fetch('/api/users', createAccountOptions);
@@ -42,12 +54,19 @@ const CreateAccount = ({ changePage, history }) => {
             setErrorMessage(jsonRes.msg);
         } else if(response.status === 200) {
             setShowSuccess(true);
-            setErrorMessage('');
-            setFirstName('');
-            setSurname('');
-            setEmail('');
-            setPassword('');
-            setReEnterPass('');
+            setFormData({
+                email: '',
+                firstName: '',
+                surname: '',
+                password: '',
+                reEnterPass: ''
+            });
+            setEmptyInputs({
+                email: false,
+                firstName: false,
+                surname: false,
+                password: false
+            })
 
             //Redirect user to home page after storing JWT and user credentials to Global Context API
             //Set context
@@ -64,9 +83,27 @@ const CreateAccount = ({ changePage, history }) => {
         }
     }
 
-    const handleOnBlur = e => {
-        //Method to check if passwords match - only if characters in there 
-        if(!(reEnterPass.length === 0) && (password !== reEnterPass)){
+    //Method to change value in state
+    const handleChange = e => {
+        setFormData(prevState => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+
+    //Method to ensure the field the user is focused on has information
+    const handleBlur = e => {
+        var isEmpty = e.target.value === '' ? true : false;
+        setEmptyInputs(prevState => ({
+            ...prevState,
+            [e.target.name]: isEmpty
+        }));
+    }
+
+    //Method to check if passwords match - only if characters in there 
+    const handleBlurPasswordCheck = e => {
+        if(!(formData.reEnterPass.length === 0) && (formData.password !== 
+            formData.reEnterPass)){
             setPasswordMatchErr(true);
         } else {
             setPasswordMatchErr(false);
@@ -78,7 +115,7 @@ const CreateAccount = ({ changePage, history }) => {
             <div className="form-container">
                 <h4>Let's get you set up with an Account!</h4>
                 <hr />
-                { emptyInputs && (
+                { (emptyInputs.email || emptyInputs.firstName || emptyInputs.surname || emptyInputs.password) && (
                     <div className="empty-inputs">
                         <h5>Please enter information in all fields</h5>
                     </div>
@@ -99,32 +136,37 @@ const CreateAccount = ({ changePage, history }) => {
                     <div className="form-input">
                         <label htmlFor="firstName">First Name:</label>
                         <input type="text" name="firstName" placeholder="Enter First Name..."
-                            onChange={e => setFirstName(e.target.value)}
-                            style={(emptyInputs && !firstName) ? errorBorderStyle: null}/>
+                            onChange={ handleChange }
+                            onBlur={ handleBlur }
+                            style={(emptyInputs.firstName && !formData.firstName) ? errorBorderStyle: null}/>
                     </div>
                     <div className="form-input">
                         <label htmlFor="surname">Surname:</label>
                         <input type="text" name="surname" placeholder="Enter Surname..."
-                            onChange={e => setSurname(e.target.value)}
-                            style={emptyInputs && !surname ? errorBorderStyle: null}/>
+                            onChange={ handleChange }
+                            onBlur={ handleBlur }
+                            style={(emptyInputs.surname && !formData.surname) ? errorBorderStyle: null}/>
                     </div>
                 </div>
                 <div className="form-input">
                     <label htmlFor="email">Email:</label>
                     <input type="text" name="email" placeholder="Enter Email..."
-                        onChange={e => setEmail(e.target.value)}
-                        style={emptyInputs && !email ? errorBorderStyle: null}/>
+                        onChange={ handleChange }
+                        onBlur={ handleBlur }
+                        style={emptyInputs.email && !formData.email ? errorBorderStyle: null}/>
                 </div>
                 <div className="form-input">
                     <label htmlFor="password">Create Password:</label>
                     <input type="password" name="password" placeholder="Enter Password..."
-                        onChange={e => setPassword(e.target.value)}/>
+                        onChange={ handleChange }
+                        onBlur={ handleBlur }
+                        style={emptyInputs.password && !formData.password ? errorBorderStyle: null}/>
                 </div>
                 <div className="form-input">
                     <label htmlFor="re-enter-password">Re enter Password:</label>
-                    <input type="password" name="re-enter-password" placeholder="Re-enter Password..."
-                        onChange={e => setReEnterPass(e.target.value)}
-                        onBlur={e => handleOnBlur(e) }
+                    <input type="password" name="reEnterPass" placeholder="Re-enter Password..."
+                        onChange={ handleChange }
+                        onBlur={e => handleBlurPasswordCheck(e) }
                         style={passwordMatchErr ? errorBorderStyle: null} />
                     { passwordMatchErr && <small style={errorTextColor}>Password's Must Match</small> }
                 </div>

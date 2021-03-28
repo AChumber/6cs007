@@ -12,7 +12,7 @@ const LoginForm = ({ changePage, history }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [isShowSuccess, setIsShowSuccess] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
-    const [user, setUser] = useContext(UserContext); //Get context to set user
+    const [, setUser] = useContext(UserContext); //Get context to set user
 
     const handleSubmit = async (e) =>{
         e.preventDefault();

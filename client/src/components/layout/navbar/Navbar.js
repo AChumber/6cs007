@@ -5,8 +5,8 @@ import Logo from '../../../assets/images/Logo.svg';
 import { UserContext } from '../../../context/UserContext';
 
 const Navbar = ({ isLoggedIn }) => {
-    const [collapseNav, setCollapseNav] = useState(false);
-    const [user, setUser] = useContext(UserContext); 
+    const [showLinks, setShowLinks] = useState(false);
+    const [, setUser] = useContext(UserContext); 
     
     const handleLogOut = () => {
         //Remove user
@@ -36,7 +36,12 @@ const Navbar = ({ isLoggedIn }) => {
         <>
         <nav className="navbar">
             <Link to="/" title="Click to go to Home page"><img src={Logo} alt="Blogs Logo" /></Link>
-            <div className="navbar-link-wrapper" style={widthStyle}>
+            <div className="drop-down-btn" onClick={ () => setShowLinks(!showLinks) }>
+                <div className={ showLinks ? "toggle" : "" } id="line1"></div>
+                <div className={ showLinks ? "toggle" : "" } id="line2"></div>
+                <div className={ showLinks ? "toggle" : "" } id="line3"></div>
+            </div>
+            <div className={showLinks ? "navbar-link-wrapper show" : "navbar-link-wrapper"} style={widthStyle}>
                 { isLoggedIn ? loggedIn : notloggedIn }
             </div>
         </nav>

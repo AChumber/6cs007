@@ -66,12 +66,20 @@
     font-weight: bold;
     margin-top: .5rem;
 }
-.my-post-card .post-desc {
+.my-post-card .post-desc .post-body {
     font-size: var(--body-font-size);
+}
+.post-body {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
 }
 .my-post-card .post-ids {
     font-size: var(--small-font-size);
     margin-bottom: .5rem;
+    color: var(--greyed-out-color);
 }
 .card-btns {
     width: 20%;

@@ -16,14 +16,19 @@ const RecentBlogs = () => {
 
     const fetchData = async () => {
         await fetch('/api/blogpost/mostrecent')
-                .then(res => res.json())
+                .then(res => {
+                    if(res.status === 500){
+                        setFetchErr(true);
+                    }
+                    return res.json()
+                })
                 .then(resJson => {
-                    if(resJson.blogs.length === 0 || resJson.status === 400){
-                        setFetchErr(!fetchErr);
+                    if(resJson.blogs.length === 0){
+                        setFetchErr(true);
                     } else {
                         setPosts([...resJson.blogs]);
                     }
-                    setIsFetching(!isFetching);
+                    setIsFetching(false);
                 })
                 .catch(err => console.log(err));
     }
@@ -31,7 +36,7 @@ const RecentBlogs = () => {
     return(
         <section>
             <div className="section-heading">
-                <h1>Recent Blogs</h1>
+                <h2>Recent Blogs</h2>
                 <hr />
             </div>
             <div className="blog-grid">
@@ -47,7 +52,7 @@ const RecentBlogs = () => {
 
 const ErrorDiv = () => {
     return(
-        <div className="error-fetching" style="grid-column: 2;">
+        <div className="error-fetching" style={{gridColumn: "2"}}>
             <h6>We Couldn't Find any Posts</h6>
             <p><Link to="/create-post">Click Here</Link> to create your own post!</p>
         </div>

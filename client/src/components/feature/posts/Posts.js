@@ -3,12 +3,14 @@ import BlogCard from '../../shared/card/BlogCard';
 import './posts.css'
 import Chevron from '../../../assets/images/Chevron.svg';
 import Loading from '../../shared/loading/Loading';
+import Spinner from '../../shared/spinner/Spinner';
 
 //Component that renders all blog posts on the website
 const Posts = () => {
     const [posts, setPosts] = useState([]);
     const [limit, setLimit] = useState(10);
     const [isLoading, setisLoading] = useState(true);
+    const [isFetchingNew, setIsFetchingNew] = useState(false);
     const [errMessage, setErrMessage] = useState('');
 
     useEffect(() => {
@@ -17,7 +19,7 @@ const Posts = () => {
 
     //Fetch Data from endpoint. Specifying limit and start based of component state
     const fetchData = () => {
-        setisLoading(true);
+        posts.length > 0 ? setIsFetchingNew(true) : setisLoading(true);
         fetch(`/api/blogpost/?offset=${posts.length}&limit=${limit}`)
             .then(res => res.json())
             .then(resJson => {
@@ -29,7 +31,7 @@ const Posts = () => {
                         setErrMessage('No More Blog Posts.') :
                         setPosts([...posts, ...resJson.blogs])
                 }
-                setisLoading(false);
+                setisLoading(false); setIsFetchingNew(false);
             });        
     }
 
@@ -41,7 +43,7 @@ const Posts = () => {
     return(
         <section className="content-section">
             <div className="header-posts">
-                <h1>Blog Posts</h1>
+                <h2>Blog Posts</h2>
                 <hr />
             </div>
             <div className="search-box">
@@ -65,9 +67,12 @@ const Posts = () => {
             </div>
             {!errMessage ?
                 (<div className="chevron">
-                    <button onClick={ () => fetchData() }>
-                        <img src={Chevron} />
-                    </button>
+                    {
+                        isFetchingNew ? <Spinner /> :    
+                        (<button onSubmit={ e => e.preventDefault() } onClick={ () => fetchData() }>
+                            <img src={Chevron} alt="Chevron to load more posts"/>
+                        </button>)
+                    }
                 </div>) :
                 (<div className="error-message">
                     <h5>{ errMessage }</h5>

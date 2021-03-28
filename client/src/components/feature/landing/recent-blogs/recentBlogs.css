@@ -1,9 +1,6 @@
 .section-heading {
     position: relative;
 }
-.section-heading h1 {
-    font-size: var(--subheading-font-size);
-}
 .section-heading hr {
     background: var(--secondary-color);
     position: absolute;
@@ -36,4 +33,16 @@
 .link-btn:hover {
     background: rgba(40,75,99,.05); 
     border-radius: 3px;
+}
+
+@media only screen and (max-width: 768px) {
+    .blog-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media only screen and (max-width: 515px) {
+    .blog-grid{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+    }
 }

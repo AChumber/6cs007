@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import CommentPostForm from './CommentPostForm';
 import { UserContext } from '../../../../context/UserContext';
 

@@ -28,7 +28,7 @@ const MyBlogs = () => {
     //Send Delete to api and remove from myBlogs state to update UI
     const handleDelete = async (postId) => {
         const response = await fetch(`/api/blogpost/${postId}`, { method: 'DELETE', headers: { authorisation: user.token } });
-        const jsonRes = await response.json();
+        await response.json();
         if(response.status === 200) {
             const remainingPosts = myBlogs.filter(blog => blog._id !== postId); 
             setMyBlogs([...remainingPosts]);
@@ -40,7 +40,7 @@ const MyBlogs = () => {
     return(
         <section className="content-section">
             <div className="header">
-                <h1>My Blogs</h1>
+                <h2>My Blogs</h2>
                 <p>Here are all your published blogs, where you can edit or delete them</p>
                 <hr />
             </div>
@@ -54,7 +54,7 @@ const MyBlogs = () => {
                     ) :
                     (
                         myBlogs.map(post => <HorizontalBlogCard postId={ post._id } title={ post.postTitle }
-                                            desc={ post.postBody } userId={ user.firstName } key={ post._id } 
+                                            desc={ post.postDesc } body={ post.postBody } userId={ user.firstName } key={ post._id } 
                                             handleDelete={ handleDelete } />)
                     )
                 }

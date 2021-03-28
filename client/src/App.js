@@ -10,6 +10,7 @@ import CreateBlog from './components/feature/createBlog/CreateBlog';
 import MyBlogs from './components/feature/myBlogs/MyBlogs';
 import { UserContext } from './context/UserContext';
 import ProtectedRoute from './components/shared/ProtectedRoute';
+import './App.css';
 
 const App = () => {
   //State used in context API

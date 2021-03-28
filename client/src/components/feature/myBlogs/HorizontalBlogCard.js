@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 //UI Component to show the posts. Different Style than RecentBlogs
-const HorizontalBlogCard = ({ title, desc, userId, postId, handleDelete }) => {
+const HorizontalBlogCard = ({ title, desc, userId, body, postId, handleDelete }) => {
     const cardLink = `/posts/${postId}`;
     return(
         <div  className="my-post-card">
@@ -9,6 +9,7 @@ const HorizontalBlogCard = ({ title, desc, userId, postId, handleDelete }) => {
                 <div className="color-section"></div>
                 <p className="post-title">{ title }</p>
                 <p className="post-desc">{ desc }</p>
+                <p className="post-body">{ body }</p>
                 <p className="post-ids">{ postId } | { userId }</p>
             </Link>
             <div className="card-btns">
