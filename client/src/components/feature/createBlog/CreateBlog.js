@@ -60,7 +60,7 @@ const CreateBlog = () => {
         //Upload image file to cloudify and return url to image
         const imagePath = await handleImageUpload();
         
-        //Fetch
+        //Fetch - replace newline carriages with <br/> in body
         const submitOptions = {
             method: 'POST',
             headers: {
@@ -69,8 +69,9 @@ const CreateBlog = () => {
             },
             body: JSON.stringify({
                 authorEmail: user.email,
+                authorName: `${user.firstName} ${user.surname}`,
                 postTitle: formInputs.title,
-                postDesc: formInputs.description,
+                postDesc: formInputs.description.replace(/\r\n/g, '<br />'),
                 postBody: formInputs.body,
                 postImgUrl: imagePath
             })

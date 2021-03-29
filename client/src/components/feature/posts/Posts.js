@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import BlogCard from '../../shared/card/BlogCard';
 import './posts.css'
 import Chevron from '../../../assets/images/Chevron.svg';
@@ -13,27 +13,30 @@ const Posts = () => {
     const [isFetchingNew, setIsFetchingNew] = useState(false);
     const [errMessage, setErrMessage] = useState('');
 
+    //Fetch Data from endpoint. Specifying limit and start based of component state
+    const fetchData = useCallback(
+        () => {
+            posts.length > 0 ? setIsFetchingNew(true) : setisLoading(true);
+            fetch(`/api/blogpost/?offset=${posts.length}&limit=${limit}`)
+                .then(res => res.json())
+                .then(resJson => {
+                    if(resJson.status === 404) {
+                        setErrMessage(resJson.msg);
+                    } else{
+                        //Check length of blogs and set error as there are no more to search
+                        resJson.blogs.length === 0 ? 
+                            setErrMessage('No More Blog Posts.') :
+                            setPosts([...posts, ...resJson.blogs])
+                    }
+                    setisLoading(false); setIsFetchingNew(false);
+                })
+            }        
+            , [limit, posts]
+        );
+
     useEffect(() => {
         fetchData(); 
-    }, [])
-
-    //Fetch Data from endpoint. Specifying limit and start based of component state
-    const fetchData = () => {
-        posts.length > 0 ? setIsFetchingNew(true) : setisLoading(true);
-        fetch(`/api/blogpost/?offset=${posts.length}&limit=${limit}`)
-            .then(res => res.json())
-            .then(resJson => {
-                if(resJson.status === 404) {
-                    setErrMessage(resJson.msg);
-                } else{
-                    //Check length of blogs and set error as there are no more to search
-                    resJson.blogs.length === 0 ? 
-                        setErrMessage('No More Blog Posts.') :
-                        setPosts([...posts, ...resJson.blogs])
-                }
-                setisLoading(false); setIsFetchingNew(false);
-            });        
-    }
+    }, [fetchData]);
 
     //Handle the change in the select element to change limit in API endpoint
     const handleChange = (e) => {

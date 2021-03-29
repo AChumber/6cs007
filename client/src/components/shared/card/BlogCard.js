@@ -9,7 +9,7 @@ const BlogCard = ({ post }) => {
         <div className="blog-card" onClick={ () => history.push(`/posts/${post._id}`) }>
             <h6>{ post.postTitle }</h6>
             <p>{ post.postDesc }</p>
-            <p className="post-author">{ post.authorEmail }</p>
+            <p className="post-author">{ post.authorName && (`By ${post.authorName}`) }</p>
         </div>
     );
 };

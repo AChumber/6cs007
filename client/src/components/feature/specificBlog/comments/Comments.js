@@ -9,7 +9,7 @@ const Comments = ({ postId, toggleOff, comments, updateCommentsArray }) => {
 
     return(
         <div className="comments-container">
-            <button onClick={() => toggleOff()}>Close Comments</button>
+            <button className="comments-btn" onClick={() => toggleOff()}>Close Comments</button>
             {
                 (comments.length === 0) ? (
                     <>
@@ -33,7 +33,7 @@ const Comments = ({ postId, toggleOff, comments, updateCommentsArray }) => {
                 )
             }
             {  !user.isLoggedIn 
-                ? <p style={{ color: '#222222', fontSize: '15px' }}>You must log in to comment</p> 
+                ? <p className="not-logged-in"  style={{ color: '#222222', fontSize: '15px' }}>You must log in to comment</p> 
                 : <CommentPostForm postId={ postId } updateCommentsArray={ updateCommentsArray }/>  }
         </div>
     );

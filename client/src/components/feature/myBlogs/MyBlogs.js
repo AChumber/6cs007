@@ -23,7 +23,7 @@ const MyBlogs = () => {
         })
             .then(res => res.json())
             .then(resJson => setMyBlogs([...resJson.blogs]));
-    }, []);
+    }, [user.email, user.token]);
 
     //Send Delete to api and remove from myBlogs state to update UI
     const handleDelete = async (postId) => {
@@ -54,8 +54,8 @@ const MyBlogs = () => {
                     ) :
                     (
                         myBlogs.map(post => <HorizontalBlogCard postId={ post._id } title={ post.postTitle }
-                                            desc={ post.postDesc } body={ post.postBody } userId={ user.firstName } key={ post._id } 
-                                            handleDelete={ handleDelete } />)
+                                            desc={ post.postDesc } body={ post.postBody } key={ post._id } 
+                                            userName={ post.authorName } handleDelete={ handleDelete } />)
                     )
                 }
             </div>

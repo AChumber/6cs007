@@ -8,7 +8,7 @@ import { UserContext } from '../../../../context/UserContext';
 
 const Hero = () => {
     const [user] = React.useContext(UserContext);
-    const isLoggedIn = (
+    const isLoggedInHeroText = (
         <>
             <h2>Welcome {user.firstName}</h2>
             <p>Share what you learn and comment on those blogs you enjoy!</p>
@@ -24,7 +24,7 @@ const Hero = () => {
             <div className="hero-text-wrapper">
                 <div className="left-text">
                     { user.isLoggedIn ?
-                        isLoggedIn : 
+                        isLoggedInHeroText : 
                         (<>
                             <h1>Share what you learn!</h1>
                             <p>Login to post your own or comment on those blogs you enjoy!</p>
@@ -32,8 +32,8 @@ const Hero = () => {
                     }
                 </div>
                 <div className="right-buttons">
-                    <Link to="/create-post">Create my Blog</Link>
-                    { isLoggedIn ?  LoggedInBtn : <Link to="/create-account">Create Account</Link>}
+                    <Link to="/create-post">Create a Blog</Link>
+                    { user.isLoggedIn ?  LoggedInBtn : <Link to="/create-account">Create Account</Link>}
                 </div>
             </div>
         </div>

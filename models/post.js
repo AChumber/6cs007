@@ -7,7 +7,8 @@ const commentSchema = new mongoose.Schema({
 });
 
 const postSchema = new mongoose.Schema({
-    authorEmail: { type:String, required: true },
+    authorEmail: { type: String, required: true },
+    authorName: { type: String, required: true },
     postTitle: { type: String, required: true },
     postDesc: { type: String },
     postBody: { type: String, required: true },

@@ -1,5 +1,5 @@
 .blog-card {
-    height: 35vh;
+    min-height: 35vh;
     border: 1px solid rgba(0,0,0,.2);
     border-radius: 5px;
     padding: 0 1rem;

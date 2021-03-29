@@ -6,16 +6,17 @@ const verifyToken = require('../users/auth.js').verifyToken;  //Get token verifi
 //@DESC Create a new post document in the DB.
 //@ACCESS Public - Need to be logged in
 router.post('/', verifyToken, async (req,res) => {
-    const { authorEmail, postTitle, postDesc, postBody, postImgUrl } = req.body;
+    const { authorEmail, authorName, postTitle, postDesc, postBody, postImgUrl } = req.body;
 
     //Validate if body of req is valid
-    if(!authorEmail || !postTitle || !postBody){
+    if(!authorEmail || !authorName || !postTitle || !postBody){
         return res.status(400).json({ msg: "Enter all fields" });
     }
 
     //Create new post document
     const newBlog = new Post({ 
         authorEmail,
+        authorName,
         postTitle,
         postDesc,
         postBody,
