@@ -29,9 +29,9 @@ const Posts = () => {
                             setPosts([...posts, ...resJson.blogs])
                     }
                     setisLoading(false); setIsFetchingNew(false);
-                })
-            }        
-            , [limit, posts]
+            })
+        }        
+        , [limit, posts]
         );
 
     useEffect(() => {

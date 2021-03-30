@@ -35,6 +35,7 @@ const LoginForm = ({ changePage, history }) => {
         const jsonRes = await response.json();
         if(response.status === 400){
             setErrorMessage(jsonRes.msg);
+            setShowSpinner(false);
         } else if(response.status === 200) {
             setIsShowSuccess(true);
              //Reset form state
@@ -52,9 +53,9 @@ const LoginForm = ({ changePage, history }) => {
                 surname: jsonRes.user.surname,
                 _id: jsonRes.user._id
             }));
+            setShowSpinner(false);
             history.push('/');
         }
-        setShowSpinner(false);
     }
 
     //Method to ensure form validation is shown to the user

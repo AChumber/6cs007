@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { UserContext } from '../../../../context/UserContext';
 import { errorBorderStyle, errorTextColor } from '../../../shared/ErrorStyles';
+import Spinner from '../../../shared/spinner/Spinner';
 
 const CreateAccount = ({ changePage, history }) => {
     const [formData, setFormData] = useState({
@@ -19,17 +20,19 @@ const CreateAccount = ({ changePage, history }) => {
     const [passwordMatchErr, setPasswordMatchErr] = useState(false);
     const [errorMessage, setErrorMessage] = useState(''); //Get error from response to server
     const [showSuccess, setShowSuccess] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(false);
     const [, setUser] = useContext(UserContext); //Get context to set user
 
     const handleSubmit = async e => {
+        setShowSpinner(true);
         e.preventDefault();
         //Validate for no empty fields
         if(!formData.email || !formData.firstName || !formData.surname){
             setEmptyInputs({
-                email: !formData.email ? true: false,
-                firstName: !formData.firstName ? true: false,
-                surname: !formData.surname ? true: false,
-                password: !formData.password ? true: false
+                email: !formData.email,
+                firstName: !formData.firstName,
+                surname: !formData.surname,
+                password: !formData.password
             });
             return null;
         }
@@ -52,6 +55,7 @@ const CreateAccount = ({ changePage, history }) => {
         const jsonRes = await response.json();
         if(response.status === 400){
             setErrorMessage(jsonRes.msg);
+            setShowSpinner(false);
         } else if(response.status === 200) {
             setShowSuccess(true);
             setFormData({
@@ -79,6 +83,7 @@ const CreateAccount = ({ changePage, history }) => {
                 surname: jsonRes.user.surname,
                 _id: jsonRes.user._id
             }));
+            setShowSpinner(false);
             history.push('/');
         }
     }
@@ -171,7 +176,9 @@ const CreateAccount = ({ changePage, history }) => {
                     { passwordMatchErr && <small style={errorTextColor}>Password's Must Match</small> }
                 </div>
                 <p>Already have an Account? <span className="form-span" onClick={ changePage }>Log In here.</span></p>
-                <button type="submit" className="create-account-btn">Create my Account</button>
+                <button type="submit" className="create-account-btn">
+                    {showSpinner ? <Spinner /> : 'Create my Account'}
+                </button>
             </div>
         </form>
     );

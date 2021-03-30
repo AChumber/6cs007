@@ -19,7 +19,9 @@ const Hero = () => {
     return(
         <div className="hero-wrapper">
             <div className="img-wrapper">
-                <img src={ HeroImage } className="hero-image" alt="An open book to show the knowledge available"/>
+                <img src={ HeroImage } className="hero-image" rel="preload" 
+                    loading="lazy"
+                    alt="An open book to show the knowledge available"/>
             </div>
             <div className="hero-text-wrapper">
                 <div className="left-text">

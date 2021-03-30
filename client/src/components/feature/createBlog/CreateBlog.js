@@ -59,7 +59,11 @@ const CreateBlog = () => {
 
         //Upload image file to cloudify and return url to image
         const imagePath = await handleImageUpload();
-        
+        //save a path that applies image compression when retrieving 
+        let imgUrl = imagePath.split('/');
+        imgUrl.splice(6,0,'q_70');
+        imgUrl.join('/');
+
         //Fetch - replace newline carriages with <br/> in body
         const submitOptions = {
             method: 'POST',
@@ -73,7 +77,7 @@ const CreateBlog = () => {
                 postTitle: formInputs.title,
                 postDesc: formInputs.description.replace(/\r\n/g, '<br />'),
                 postBody: formInputs.body,
-                postImgUrl: imagePath
+                postImgUrl: imgUrl
             })
         }
         const response = await fetch('api/blogpost/', submitOptions);
