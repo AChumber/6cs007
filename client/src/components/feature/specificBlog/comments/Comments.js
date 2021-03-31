@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import CommentPostForm from './CommentPostForm';
 import { UserContext } from '../../../../context/UserContext';
+import '../specificBlog.css';
 
 //Child component to display comments of a blog - passed via props
 //Also send/post a comment on particular blog
@@ -33,7 +34,7 @@ const Comments = ({ postId, toggleOff, comments, updateCommentsArray }) => {
                 )
             }
             {  !user.isLoggedIn 
-                ? <p className="not-logged-in"  style={{ color: '#222222', fontSize: '15px' }}>You must log in to comment</p> 
+                ? <p className="not-logged-in">You must log in to comment</p> 
                 : <CommentPostForm postId={ postId } updateCommentsArray={ updateCommentsArray }/>  }
         </div>
     );

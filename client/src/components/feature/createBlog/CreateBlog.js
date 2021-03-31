@@ -2,8 +2,8 @@ import { useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom'; 
 import { UserContext } from '../../../context/UserContext';
 import { errorBorderStyle, errorTextColor } from '../../shared/ErrorStyles';
+import Spinner from '../../shared/spinner/Spinner';
 import './createBlog.css';
-
 
 //Form component to create a new blog
 const CreateBlog = () => {
@@ -24,6 +24,7 @@ const CreateBlog = () => {
     });
     const [errMessage, setErrMessage] = useState('');
     const [isRedirect, setIsRedirect] = useState(false);
+    const [showSpinner, setShowSpinner] = useState(false);
     const [user] = useContext(UserContext);
 
     //Upload image to cloudify
@@ -50,6 +51,7 @@ const CreateBlog = () => {
     }
 
     const handleSubmit = async (e) => {
+        setShowSpinner(true);
         e.preventDefault();
         //Validate if fields are empty or not
         if(!formInputs.title || !formInputs.body || !formInputs.description) {
@@ -86,11 +88,13 @@ const CreateBlog = () => {
         }
         const jsonRes = await response.json();
         if(response.status === 200){
+            setShowSpinner(false);
             setModals(prevState => ({ ...prevState, successModal: !prevState.successModal, emptyFieldsModal: false }));
             setTimeout(()=>{
                 setIsRedirect(true);
             }, 2000)
         } else{ 
+            setShowSpinner(false);
             setErrMessage(jsonRes.msg);
         }
     }
@@ -161,7 +165,9 @@ const CreateBlog = () => {
                         })) } />
                 </div>
                 <div className="form-group-btn">
-                    <button type="submit">Post Blog</button>
+                    <button type="submit">
+                        {showSpinner ? <Spinner /> : 'Post Blog'}
+                    </button>
                     <Link to="/">Cancel</Link>
                     
                 </div>

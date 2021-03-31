@@ -41,7 +41,7 @@ const SpecificBlog = () => {
             {isLoading ? <Loading /> :
             Object.keys(post).length === 0 ? <NoPost /> : (
                 <section className={ "specific-blog-container " +(isShowComments ? "comments-on" : '') } >
-                    <div className="post">
+                    <div className={ "post " +(isShowComments ? "post-comments-layout" : '') }>
                         <div className="post-heading">
                             { post.postImgUrl && <img className="post-image" src={ post.postImgUrl } alt={ post.postTitle }/> }
                             <div className={post.postImgUrl ? "post-heading-wrapper img-relative" : "post-heading-wrapper"}>

@@ -36,6 +36,9 @@
     display: flex;
     justify-content: space-between;
 }
+.post-comments-layout {
+    width: 140%;
+}
 
 .post-heading {
     padding: 0 1rem;
@@ -43,31 +46,38 @@
 }
 .post-heading h1 {
     font-size: var(--heading-font-size);
+    margin: 0;
+}
+.post-heading .post-author {
+    margin-top: 0.5rem;
 }
 .post-heading :is(.post-author, .post-date) {
     font-size: var(--small-font-size);
-    color: var(--greyed-out-color);
+    color: rgb(92, 92, 92);
+    margin: 0;
 }
 .post-image {
-    width: 90%;
+    width: 100%;
     margin: auto;
 }
 .img-relative {
     position: absolute;
-    width: 50%;
-    top: 100%;
+    width: 60%;
+    bottom: 0;
     left: 0;
-    transform: translate(-0%, -100%);
-    padding: .5rem 1rem;
+    transform: translate(-0%, 30%);
+    padding: .2rem 1rem;
     margin-top: 1rem;
     background-color: #FEFEFE;
+    border-radius: 5px;
 }
 .specific-post-desc {
     background-color: #fcfcfc;
 }
 .specific-post-desc p {
+    margin-top: 3rem;
     text-align: center;
-    color: var(--greyed-out-color);
+    color: rgb(104, 104, 104);
 }
 .specific-post-body {
     white-space: pre-line;
@@ -77,8 +87,8 @@
 
 
 .comments-container {
-    background-color: var(--bg-color);
-    width: 30%;
+    background-color: #f8f8f8;
+    width: 40%;
     position: sticky;
 }
 .no-comments {
@@ -137,6 +147,11 @@
     color: var(--bg-color);
     cursor: pointer;
 }
+.not-logged-in {
+    text-align: center;
+    color: rgb(180, 180, 180);
+    font-size: 14px;
+}
 
 /*Phone Size - Smaller text and box size*/
 @media only screen and (max-width: 768px){
@@ -153,8 +168,5 @@
     .comments-container {
         position: unset;
         width: 100%;
-    }
-    .not-logged-in {
-        text-align: center;
     }
 }

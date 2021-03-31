@@ -2,7 +2,7 @@
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
-    border: 3px solid #333333;
+    border: 3px solid #DDDDDD;
     border-top: 3px solid var(--primary-color);
     position: relative;
     animation: spin 2s linear infinite;
@@ -13,7 +13,7 @@
     height: 90%;
     border-radius: 50%;
     border: 3px solid #DDDDDD;
-    border-left: 3px solid var(--secondary-color);
+    border-bottom: 3px solid var(--secondary-color);
     position: absolute;
     top: 50%;
     left: 50%;
