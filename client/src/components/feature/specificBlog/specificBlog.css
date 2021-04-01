@@ -36,9 +36,6 @@
     display: flex;
     justify-content: space-between;
 }
-.post-comments-layout {
-    width: 140%;
-}
 
 .post-heading {
     padding: 0 1rem;
@@ -164,6 +161,7 @@
     }
     .comments-on {
         display: block;
+        width: 75%;
     }
     .comments-container {
         position: unset;

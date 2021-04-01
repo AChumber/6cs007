@@ -89,6 +89,24 @@ router.get('/mostrecent', async (req, res) => {
         .catch(err => res.status(400).json({ msg: "Could not retrieve recent posts" }));
 });
 
+//@GET blogPost (URL Query for post title for autocomplete) - .../search?query=te
+//@DESC Gets blogs in DB with query in title
+//@ACCESS Public
+router.get('/search', async (req, res) => {
+    const searchQuery = req.query.query;
+    await Post.find(
+        { 
+            postTitle: { $regex: searchQuery, $options: 'i' } 
+        }, 
+        '-postBody -comments -__v -posted',
+        { limit: 5 } )
+        .then(blogs => {
+            return res.status(200).json({ blogs });
+        })
+        .catch(err => res.status(400).json({ msg: "Could not retrieve recent posts" }));
+})
+
+
 //@GET blogPost (pass id of blog post)
 //@DESC Gets one blogs in DB with specified id in req
 //@ACCESS Public

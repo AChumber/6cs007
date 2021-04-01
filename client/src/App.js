@@ -34,7 +34,8 @@ const App = () => {
                 <Route exact path="/posts/:id" component={ SpecificBlog } />
                 <Route exact path="/posts" component={ Posts } />
                 <ProtectedRoute exact path="/create-post" component={ CreateBlog } />
-                <ProtectedRoute exacy path="/my-posts" component={ MyBlogs } />
+                <ProtectedRoute exact path="/my-posts" component={ MyBlogs } />
+                <ProtectedRoute exact path="/edit-blog/:id" component={ CreateBlog } />
               <Footer isLoggedIn={ user.isLoggedIn } />
             </>
           </Switch>

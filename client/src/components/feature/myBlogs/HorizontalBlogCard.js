@@ -13,7 +13,12 @@ const HorizontalBlogCard = ({ title, desc, body, postId, userName, handleDelete 
                 <p className="post-ids">{ postId } | { userName }</p>
             </Link>
             <div className="card-btns">
-                <button className="edit">Edit</button>
+                <Link className="edit" to={{
+                    pathname: `/edit-blog/${postId}`,
+                    state: {
+                        fromMyBlogs: true
+                    }
+                }}>Edit</Link>
                 <button className="delete" onClick={ () => handleDelete(postId) }>Delete</button>
             </div>
         </div>

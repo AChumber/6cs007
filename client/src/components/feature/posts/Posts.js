@@ -4,6 +4,7 @@ import './posts.css'
 import Chevron from '../../../assets/images/Chevron.svg';
 import Loading from '../../shared/loading/Loading';
 import Spinner from '../../shared/spinner/Spinner';
+import SeachPosts from './SeachPosts';
 
 //Component that renders all blog posts on the website
 const Posts = () => {
@@ -49,12 +50,7 @@ const Posts = () => {
                 <h2>Blog Posts</h2>
                 <hr />
             </div>
-            <div className="search-box">
-                <input type="text" placeholder="Search for Blog Posts..." />
-                <button>Search</button>
-                <div id="search-results">
-                </div>
-            </div>
+            <SeachPosts />
             <div className="show-amount">
                 <label htmlFor="amount-list">Select amount to show:</label>
                 <select value={limit} onChange={ e => handleChange(e) } id="amount-list">
