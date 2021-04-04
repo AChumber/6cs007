@@ -34,7 +34,7 @@ const Hero = () => {
                     }
                 </div>
                 <div className="right-buttons">
-                    <Link to="/create-post">Create a Blog</Link>
+                    <Link to={{ pathname: "/create-post", state:{ prevPath: window.location.pathname }}}>Create a Blog</Link>
                     { user.isLoggedIn ?  LoggedInBtn : <Link to="/create-account">Create Account</Link>}
                 </div>
             </div>

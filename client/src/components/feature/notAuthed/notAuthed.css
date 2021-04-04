@@ -1,0 +1,25 @@
+.center-info-container {
+    min-height: 70.5vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.center-info-container h1 {
+    text-align: center;
+}
+.not-authed-image { 
+    width: 30rem;
+}
+
+/*Phone Size - Smaller text and box size*/
+@media only screen and (max-width: 768px){
+    .not-authed-image {
+        width: 26rem;
+    }
+}
+@media only screen and (max-width: 515px) {
+    .not-authed-image {
+        width: 80%;
+    }
+}

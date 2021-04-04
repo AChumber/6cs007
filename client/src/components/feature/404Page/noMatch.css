@@ -1,0 +1,40 @@
+.no-match-404 {
+    min-height: 65.8vh;
+}
+.center-info-container h1 {
+    margin:0px;
+}
+.error-404 {
+    display: flex;
+    width: 30%;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}
+.error-404 h2 {
+    font-size: 48px;
+}
+.error-404 .underline {
+    position: absolute;
+    width: 20px;
+    border: 2px solid var(--secondary-color);
+    top: 72%;
+    left: 20%;
+    transform: translate(-20%, -72%);
+    animation: slide 3s ease-out infinite alternate-reverse;
+    padding: 0;
+}
+.error-404 .colored {
+    color: var(--primary-color);
+}
+
+@keyframes slide {
+    0% {
+        left: 18%;
+        width: 20px;
+    }
+    100% {
+        left: 75%;
+        width: 30px;
+    }
+}

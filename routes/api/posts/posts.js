@@ -139,12 +139,13 @@ router.delete('/:id', verifyToken, async (req,res) => {
 //      Will verify with middleware 
 //@ACCESS Public - Need to be logged in 
 router.put('/:id', verifyToken, async (req, res) => {
-    const { postTitle, postDesc, postBody } = req.body;
+    const { postTitle, postDesc, postBody, postImgUrl } = req.body;
     //Wont update all fields. Just fields like title, body or desc
     await Post.findByIdAndUpdate(req.params.id, {
         postTitle,
         postDesc,
-        postBody
+        postBody,
+        postImgUrl
     })
     .then(blog => {
         if(!blog) {

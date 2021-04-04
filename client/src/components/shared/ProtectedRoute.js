@@ -15,7 +15,7 @@ function ProtectedRoute({ component: Component, ...rest }) {
                     //user is logged in
                     <Component /> :
                     <Redirect to={{
-                        pathname: '/',
+                        pathname: '/unauthorised',
                         state: {
                             from: props.location
                         }}} /> 

@@ -11,6 +11,9 @@ import MyBlogs from './components/feature/myBlogs/MyBlogs';
 import { UserContext } from './context/UserContext';
 import ProtectedRoute from './components/shared/ProtectedRoute';
 import './App.css';
+import NoPost from './components/feature/specificBlog/NoPost';
+import NotAuthed from './components/feature/notAuthed/NotAuthed';
+import NoMatch404 from './components/feature/404Page/NoMatch404';
 
 const App = () => {
   //State used in context API
@@ -30,12 +33,17 @@ const App = () => {
               render={() => <Login isLoggingIn={false}/>} />
             <>
               <Navbar isLoggedIn={ user.isLoggedIn } />
-                <Route exact path="/" component={ Landing } />
-                <Route exact path="/posts/:id" component={ SpecificBlog } />
-                <Route exact path="/posts" component={ Posts } />
-                <ProtectedRoute exact path="/create-post" component={ CreateBlog } />
-                <ProtectedRoute exact path="/my-posts" component={ MyBlogs } />
-                <ProtectedRoute exact path="/edit-blog/:id" component={ CreateBlog } />
+                <Switch>
+                  <Route exact path="/" component={ Landing } />
+                  <Route exact path="/posts/:id" component={ SpecificBlog } />
+                  <Route exact path="/posts" component={ Posts } />
+                  <Route exact path="/no-post" component={ NoPost } />
+                  <Route exact path="/unauthorised" component={ NotAuthed } />
+                  <ProtectedRoute exact path="/create-post" component={ CreateBlog } />
+                  <ProtectedRoute exact path="/my-posts" component={ MyBlogs } />
+                  <ProtectedRoute exact path="/edit-blog/:id" component={ CreateBlog } />
+                  <Route component={ NoMatch404 } />
+                </Switch>
               <Footer isLoggedIn={ user.isLoggedIn } />
             </>
           </Switch>
