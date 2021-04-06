@@ -3,13 +3,16 @@
     display: flex;
     position: relative;
 }
+.form-image-container {
+    width: 45%;
+}
 .form-image {
-    background-image: url("../../../assets/images/form-image.jpg");
+    width: 100%;
+    height: 100vh;
     background-position: center;
     background-size: cover;
     filter: grayscale(95%);
     opacity: 50%;
-    width: 45%;
 }
 .login-logo {
     position: absolute;
@@ -131,14 +134,16 @@
         flex-direction: column;
         height: 100vh;
     }
-    .form-image {
+    .form-image-container {
         width: 100%;
         height: 30%;
+    }
+    .form-image {
+        height: 100%;
     }
     .right-side {
         width: 100%;
         height: 70%;
-        margin-top: .5em;
     }
     .right-side h4 {
         font-size: var(--sm-heading-font-size);
