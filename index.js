@@ -27,4 +27,8 @@ app.get("/", (req,res) => {
     res.send("Hello World!");
 });
 
+
+//Serve React app (build version) when at any route
+
+
 app.listen(PORT, () => console.log(`Running on localhost on port ${PORT}.`));
