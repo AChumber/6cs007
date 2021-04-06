@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoute = require('./routes/api/users/auth.js');
+const path = require('path');
 
 //Connect to DB
 mongoose.connect(process.env.DB_CONNECTION,{
@@ -22,13 +23,13 @@ app.use('/api/users', require('./routes/api/users/users.js'));
 app.use('/api/auth', authRoute.router);
 app.use('/api/blogpost', require('./routes/api/posts/posts.js'));
 
-//Dummy root route
-app.get("/", (req,res) => {
-    res.send("Hello World!");
-});
-
-
 //Serve React app (build version) when at any route
-
+if(process.env.NODE_ENV === 'production'){
+    //Static folder for built react app
+    app.use(express.static('client/build'));
+    app.get('*', (req,res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    } )
+}
 
 app.listen(PORT, () => console.log(`Running on localhost on port ${PORT}.`));
