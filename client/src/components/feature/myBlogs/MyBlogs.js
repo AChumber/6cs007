@@ -49,7 +49,7 @@ const MyBlogs = () => {
                     myBlogs.length === 0 ? (
                         <div className="no-posts">
                             <p>You currently have no posts published</p>
-                            <p><i><Link to="create-post">Click here</Link></i> To Create a blog</p>
+                            <p><i><Link to={{ pathname: "/create-post", state: { prevPath: 'navbar' }}}>Click here</Link></i> To Create a blog</p>
                         </div>
                     ) :
                     (

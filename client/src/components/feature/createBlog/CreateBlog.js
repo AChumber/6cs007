@@ -263,7 +263,7 @@ const CreateBlog = () => {
                     <button type="submit">
                         {showSpinner ? <Spinner /> : ( isEditBlog ? 'Update Blog' :'Post Blog')}
                     </button>
-                    <Link to="/">Cancel</Link>
+                    <Link to="/my-posts">Cancel</Link>
                     
                 </div>
                 {
