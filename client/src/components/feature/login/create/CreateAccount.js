@@ -34,6 +34,7 @@ const CreateAccount = ({ changePage, history }) => {
                 surname: !formData.surname,
                 password: !formData.password
             });
+            setShowSpinner(false);
             return null;
         }
         setEmptyInputs(false);
