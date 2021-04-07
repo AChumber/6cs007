@@ -38,7 +38,7 @@ const MyBlogs = () => {
     }
 
     return(
-        <section className="content-section">
+        <section className="content-section post-list-container">
             <div className="header">
                 <h2>My Blogs</h2>
                 <p>Here are all your published blogs, where you can edit or delete them</p>
@@ -49,7 +49,7 @@ const MyBlogs = () => {
                     myBlogs.length === 0 ? (
                         <div className="no-posts">
                             <p>You currently have no posts published</p>
-                            <p><i><Link to={{ pathname: "/create-post", state: { prevPath: 'navbar' }}}>Click here</Link></i> To Create a blog</p>
+                            <p><i><Link to={{ pathname: "/create-post", state: { prevPath: 'navbar' }}}>Click here</Link></i> to Create a blog</p>
                         </div>
                     ) :
                     (
