@@ -10,15 +10,15 @@ import SeachPosts from './SeachPosts';
 const Posts = () => {
     const [posts, setPosts] = useState([]);
     const [limit, setLimit] = useState(10);
-    const [isLoading, setisLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [isFetchingNew, setIsFetchingNew] = useState(false);
     const [errMessage, setErrMessage] = useState('');
 
     //Fetch Data from endpoint. Specifying limit and start based of component state
     const fetchData = useCallback(
-        () => {
-            posts.length > 0 ? setIsFetchingNew(true) : setisLoading(true);
-            fetch(`/api/blogpost/?offset=${posts.length}&limit=${limit}`)
+        (url) => {
+            url = !url ? '/api/blogpost/?limit=10' : url;
+            fetch(url)
                 .then(res => res.json())
                 .then(resJson => {
                     if(resJson.status === 404) {
@@ -29,15 +29,16 @@ const Posts = () => {
                             setErrMessage('No More Blog Posts.') :
                             setPosts([...posts, ...resJson.blogs])
                     }
-                    setisLoading(false); setIsFetchingNew(false);
             })
+            setIsLoading(false); 
+            setIsFetchingNew(false);
         }        
-        , [limit, posts]
+        , [posts]
         );
 
     useEffect(() => {
         fetchData(); 
-    }, [fetchData]);
+    }, []);
 
     //Handle the change in the select element to change limit in API endpoint
     const handleChange = (e) => {
@@ -68,7 +69,10 @@ const Posts = () => {
                 (<div className="chevron">
                     {
                         isFetchingNew ? <Spinner /> :    
-                        (<button onSubmit={ e => e.preventDefault() } onClick={ () => fetchData() }>
+                        (<button onSubmit={ e => e.preventDefault() } onClick={ () => {
+                            setIsFetchingNew(true);
+                            fetchData(`/api/blogpost/?offset=${posts.length}&limit=${limit}`);
+                            } }>
                             <img src={Chevron} alt="Chevron to load more posts"/>
                         </button>)
                     }
