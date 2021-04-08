@@ -41,7 +41,9 @@ const Navbar = ({ isLoggedIn }) => {
     return(
         <>
         <nav className="navbar">
-            <Link onClick={handleClick} to="/" title="Click to go to Home page"><img src={Logo} alt="Blogs Logo" /></Link>
+            <Link onClick={handleClick} to="/" title="Click to go to Home page">
+                <img className="logo-image" src={Logo} alt="Blogs Logo" />
+            </Link>
             <div className="drop-down-btn" onClick={ () => setShowLinks(!showLinks) }>
                 <div className={ showLinks ? "toggle" : "" } id="line1"></div>
                 <div className={ showLinks ? "toggle" : "" } id="line2"></div>

@@ -22,7 +22,7 @@ const Footer = ({ isLoggedIn }) => {
                 <div className="links">
                     <div className="logo-wrapper">
                         <Link to="/" title="Click to go to Home page">
-                            <img src={ Logo } alt="Logo for MyBlogs"/>
+                            <img className="logo-image" src={ Logo } alt="Logo for MyBlogs"/>
                         </Link>
                     </div>
                     <ul className="footer-links">

@@ -6,8 +6,9 @@
     padding: 1% 5%;
     position: relative;
 }
-.navbar a img{
+.logo-image {
     width: 3em;
+    height: 3em;
     margin-top: 0.25rem;
     flex-grow: 2;
     margin-right: 50vw;
