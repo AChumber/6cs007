@@ -27,6 +27,7 @@ const MyBlogs = () => {
 
     //Send Delete to api and remove from myBlogs state to update UI
     const handleDelete = async (postId) => {
+        console.time('Delete A Blog');
         const response = await fetch(`/api/blogpost/${postId}`, { method: 'DELETE', headers: { authorisation: user.token } });
         await response.json();
         if(response.status === 200) {
@@ -35,6 +36,7 @@ const MyBlogs = () => {
         } else {
             console.log("Couldn't delete post");
         }
+        console.timeEnd('Delete A Blog');
     }
 
     return(

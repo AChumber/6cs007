@@ -24,6 +24,7 @@ const CreateAccount = ({ changePage, history }) => {
     const [, setUser] = useContext(UserContext); //Get context to set user
 
     const handleSubmit = async e => {
+        console.time('Create An Account');
         setShowSpinner(true);
         e.preventDefault();
         //Validate for no empty fields
@@ -57,6 +58,7 @@ const CreateAccount = ({ changePage, history }) => {
         if(response.status === 400){
             setErrorMessage(jsonRes.msg);
             setShowSpinner(false);
+            console.timeEnd('Create An Account');
         } else if(response.status === 200) {
             setShowSuccess(true);
             setFormData({
@@ -85,6 +87,7 @@ const CreateAccount = ({ changePage, history }) => {
                 _id: jsonRes.user._id
             }));
             setShowSpinner(false);
+            console.timeEnd('Create An Account');
             history.push('/');
         }
     }

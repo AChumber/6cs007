@@ -90,6 +90,7 @@ const CreateBlog = () => {
     }
 
     const handleSubmit = async (e) => {
+        console.time('Creating Post');
         setShowSpinner(true);
         e.preventDefault();
         //If editing blog - update post in db else create a new document in db
@@ -137,6 +138,7 @@ const CreateBlog = () => {
                 setErrMessage(jsonRes.msg);
             }
         }
+        console.timeEnd('Creating Post');
     }
 
     //Handle update of blog if component is updating an existing blog
