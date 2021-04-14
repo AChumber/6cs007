@@ -1,19 +1,26 @@
+import React, { useState, Suspense  } from 'react';
+import { BrowserRouter,Switch,Route } from 'react-router-dom';
 import Landing from './components/feature/landing/Landing';
-import Login from "./components/feature/login/Login"
+import Login from './components/feature/login/Login';
 import Footer from './components/layout/footer/Footer';
 import Navbar from "./components/layout/navbar/Navbar";
-import { BrowserRouter,Switch,Route } from 'react-router-dom';
-import { useState } from 'react';
 import SpecificBlog from './components/feature/specificBlog/SpecificBlog';
-import Posts from './components/feature/posts/Posts';
-import CreateBlog from './components/feature/createBlog/CreateBlog';
-import MyBlogs from './components/feature/myBlogs/MyBlogs';
 import { UserContext } from './context/UserContext';
 import ProtectedRoute from './components/shared/ProtectedRoute';
+import Spinner from './components/shared/spinner/Spinner';
 import './App.css';
-import NoPost from './components/feature/specificBlog/NoPost';
-import NotAuthed from './components/feature/notAuthed/NotAuthed';
-import NoMatch404 from './components/feature/404Page/NoMatch404';
+const MyBlogs = React.lazy(() => import('./components/feature/myBlogs/MyBlogs'));
+const CreateBlog = React.lazy(() => import('./components/feature/createBlog/CreateBlog'));
+const Posts = React.lazy(() => import('./components/feature/posts/Posts'));
+const NoPost = React.lazy(() => import('./components/feature/specificBlog/NoPost'));
+const NotAuthed = React.lazy(() => import('./components/feature/notAuthed/NotAuthed'));
+const NoMatch404 = React.lazy(() => import('./components/feature/404Page/NoMatch404'));
+//import Posts from './components/feature/posts/Posts';
+//import CreateBlog from './components/feature/createBlog/CreateBlog';
+//import MyBlogs from './components/feature/myBlogs/MyBlogs';
+//import NoPost from './components/feature/specificBlog/NoPost';
+//import NotAuthed from './components/feature/notAuthed/NotAuthed';
+//import NoMatch404 from './components/feature/404Page/NoMatch404';
 
 const App = () => {
   //State used in context API
@@ -25,7 +32,6 @@ const App = () => {
     <UserContext.Provider value={[user, setUser]}>
       <div className="App">
         <BrowserRouter>
-          
           <Switch>
             <Route exact path="/login" 
               render={() => <Login isLoggingIn={true}/>} />
@@ -33,6 +39,7 @@ const App = () => {
               render={() => <Login isLoggingIn={false}/>} />
             <>
               <Navbar isLoggedIn={ user.isLoggedIn } />
+                <Suspense fallback={<Spinner />}>
                 <Switch>
                   <Route exact path="/" component={ Landing } />
                   <Route exact path="/posts/:id" component={ SpecificBlog } />
@@ -44,10 +51,10 @@ const App = () => {
                   <ProtectedRoute exact path="/edit-blog/:id" component={ CreateBlog } />
                   <Route component={ NoMatch404 } />
                 </Switch>
+                </Suspense>
               <Footer isLoggedIn={ user.isLoggedIn } />
             </>
           </Switch>
-          
         </BrowserRouter>
       </div>
     </UserContext.Provider>
