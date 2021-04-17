@@ -43,7 +43,7 @@ const SpecificBlog = () => {
                 <section className={ "specific-blog-container " +(isShowComments ? "comments-on" : '') } >
                     <div className={ "post " +(isShowComments ? "post-comments-layout" : '') }>
                         <div className="post-heading">
-                            { post.postImgUrl && <img className="post-image" src={ post.postImgUrl } alt={ post.postTitle }/> }
+                            { post.postImgUrl && <img className="post-image" src={ post.postImgUrl } alt={ post.postTitle } loading="lazy" rel="preload"/> }
                             <div className={post.postImgUrl ? "post-heading-wrapper img-relative" : "post-heading-wrapper"}>
                                 <h1>{ post.postTitle }</h1>
                                 <p className="post-author">by { post.authorName }</p>
