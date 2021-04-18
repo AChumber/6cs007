@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import BlogCard from '../../shared/card/BlogCard';
 import './posts.css'
 import Chevron from '../../../assets/images/Chevron.svg';
@@ -85,4 +85,4 @@ const Posts = () => {
     )
 };
 
-export default Posts;
+export default React.memo(Posts);

@@ -1,4 +1,6 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+
 const NoPost = () => {
     return(
         <div className="no-content">
@@ -9,4 +11,4 @@ const NoPost = () => {
     );
 };
 
-export default NoPost;
+export default React.memo(NoPost);

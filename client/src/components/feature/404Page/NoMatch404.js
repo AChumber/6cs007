@@ -17,4 +17,4 @@ function NoMatch404() {
     )
 }
 
-export default NoMatch404
+export default React.memo(NoMatch404);

@@ -16,4 +16,4 @@ function NotAuthed() {
     )
 }
 
-export default NotAuthed;    
+export default React.memo(NotAuthed);    

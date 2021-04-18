@@ -1,4 +1,5 @@
 //Landing page component
+import React from 'react';
 import Hero from "./hero/Hero"
 import RecentBlogs from "./recent-blogs/RecentBlogs"
 
@@ -17,4 +18,4 @@ const Landing = () => {
     );
 };
 
-export default Landing;
+export default React.memo(Landing);
