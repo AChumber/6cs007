@@ -24,12 +24,13 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400;700&display=swap" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" media="none" onload="this.media='all'; this.onload=null;">
     <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap">
     </noscript>
     <title>MyBlogs</title>
     <style>
+      body{margin: 0;padding: 0;font-family: 'Noto Sans JP', sans-serif, monospace;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;box-sizing: border-box;background-color: var(--bg-color);}
       :root {
         --bg-color: #FAFAFA;
         --white-font: #FAFAFA;

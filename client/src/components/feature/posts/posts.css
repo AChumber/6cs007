@@ -1,13 +1,14 @@
 .header-posts {
     position: relative;
+    padding: 0 5%;
 }
 .header-posts hr {
-    width: 15%;
+    width: 100px;
     background-color: var(--secondary-color);
     position: absolute;
-    left: -2%;
+    left: 4%;
     bottom: -0%;
-    transform: translate(2%, 500%);
+    transform: translate(4%, 500%);
 }
 .search-box {
     width: 80%;
@@ -40,7 +41,8 @@
     cursor: pointer;
 }
 .show-amount {
-    margin-bottom: 1rem; 
+    margin-bottom: 1rem;
+    padding: 0 5%; 
 }
 .show-amount label {
     color: #333333;
@@ -55,6 +57,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
+    padding: 0 5%;
 }
 
 .chevron {
