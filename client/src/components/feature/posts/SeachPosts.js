@@ -37,4 +37,4 @@ const SeachPosts = () => {
     )
 }
 
-export default SeachPosts
+export default React.memo(SeachPosts);

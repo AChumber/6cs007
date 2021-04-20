@@ -1,6 +1,6 @@
 import './navbar.css';
 import { Link } from 'react-router-dom';
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import Logo from '../../../assets/images/Logo.svg';
 import { UserContext } from '../../../context/UserContext';
 
@@ -58,4 +58,4 @@ const Navbar = ({ isLoggedIn }) => {
     );
 }
 
-export default Navbar;
+export default React.memo(Navbar);

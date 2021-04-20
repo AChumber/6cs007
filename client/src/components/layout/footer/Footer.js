@@ -1,4 +1,5 @@
 import './footer.css';
+import React from 'react';
 import Logo from '../../../assets/images/Logo.svg';
 import { Link } from 'react-router-dom';
 
@@ -35,4 +36,4 @@ const Footer = ({ isLoggedIn }) => {
     );
 };
 
-export default Footer;
+export default React.memo(Footer);

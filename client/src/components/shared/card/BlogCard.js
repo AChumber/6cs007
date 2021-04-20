@@ -1,5 +1,6 @@
 //child Component - Recieve props and create the card
 import { useHistory } from 'react-router-dom';
+import React from 'react';
 import './blogCard.css';
 
 const BlogCard = ({ post }) => {
@@ -14,4 +15,4 @@ const BlogCard = ({ post }) => {
     );
 };
 
-export default BlogCard;
+export default React.memo(BlogCard);

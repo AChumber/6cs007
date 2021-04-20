@@ -4,7 +4,7 @@ import CreateAccount from './create/CreateAccount';
 import FormImage from '../../../assets/images/form-image.jpg';
 import './login.css';
 import Logo from '../../../assets/images/Logo.svg';
-import { useState } from 'react'; 
+import React, { useState } from 'react'; 
 import { Link, useHistory } from 'react-router-dom';
 
 const Login = ({ isLoggingIn }) => {
@@ -28,4 +28,4 @@ const Login = ({ isLoggingIn }) => {
     );
 }
 
-export default Login;
+export default React.memo(Login);
