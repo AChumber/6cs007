@@ -13,9 +13,6 @@ const Posts = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [isFetchingNew, setIsFetchingNew] = useState(false);
     const [errMessage, setErrMessage] = useState('');
-    const paddingStyle = {
-        padding: '0 1rem'
-    }
 
     //Fetch Data from endpoint. Specifying limit and start based of component state
     const fetchData = useCallback(
