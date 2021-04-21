@@ -71,6 +71,8 @@
     display: block;
 }
 .chevron button img {
+    width: 2.5rem;
+    height: 2.5rem;
     padding: .725rem;
     transition: all 0.15s ease-in-out;
 } 
