@@ -24,6 +24,22 @@ const NoMatch404 = React.lazy(() => import('./components/feature/404Page/NoMatch
 //import NotAuthed from './components/feature/notAuthed/NotAuthed';
 //import NoMatch404 from './components/feature/404Page/NoMatch404';
 
+//Spinner to show when the components are being loaded due to lazy loading
+const SuspenseSpinner = () => {
+  const divStyles = {
+    top: '50%',
+    textAlign: 'center',
+    transform: 'translateY(100%)'
+  };
+
+  return(
+    <div style={divStyles}>
+      <Spinner />
+      <p>Loading...</p>
+    </div>
+  );
+};
+
 const App = () => {
   //State used in context API
   const [user, setUser] = useState({
@@ -34,7 +50,7 @@ const App = () => {
     <UserContext.Provider value={[user, setUser]}>
       <div className="App">
         <BrowserRouter>
-        <Suspense fallback={<Spinner />}>
+        <Suspense fallback={<SuspenseSpinner />}>
           <Switch>
               <Route exact path="/login" 
                 render={() => <Login isLoggingIn={true}/>} />
