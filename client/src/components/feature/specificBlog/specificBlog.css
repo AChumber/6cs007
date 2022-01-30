@@ -5,7 +5,16 @@
     padding: 1rem;
     text-align: center;
 }
-
+/*Overlay to 'dim' content when comments draw is open*/
+.specific-post-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.2);
+}
 .specific-blog-container {
     width: 75%;
     margin: auto;
@@ -30,11 +39,6 @@
     cursor: pointer;
     background-color: rgb(250, 250, 250);
     border-color: var(--primary-color);
-}
-.comments-on {
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
 }
 
 .post-heading {
@@ -87,8 +91,22 @@
 
 .comments-container {
     background-color: #f8f8f8;
-    width: 40%;
-    position: sticky;
+    z-index: 10;
+    height: 100vh;
+    width: 25vw;
+    position: fixed;
+    top: 0;
+    right: 0;
+    box-shadow: -2px 0px 5px 1px rgb(209, 209, 209);
+    padding-top: 5rem;
+    overflow-y: auto;
+}
+.comments-container .comments-btn {
+    top: 2.5rem;
+    right: 1rem;
+    width: 15rem;
+    background-color: #dadada;
+    padding: 0.75rem 0;
 }
 .no-comments {
     text-align: center;
@@ -96,6 +114,8 @@
 }
 .comment {
     margin-bottom: 1rem;
+    width: 95%;
+    margin: auto;
 }
 .comment-body {
     font-size: var(--body-font-size);
@@ -152,21 +172,34 @@
     font-size: 14px;
 }
 
+
+@media only screen and (max-width: 1400px){
+    .comments-container {
+        width: 35vw;
+    }
+}
+@media only screen and (max-width: 992px){
+    .comments-container {
+        width: 45vw;
+    }
+}
 /*Phone Size - Smaller text and box size*/
 @media only screen and (max-width: 768px){
-    /*Collapse Comments to the bottom of the blog post. Flex-direction*/
-    .comments-btn {
-        display: inline-block;
-        margin: .5rem 0.45rem;
-        position: unset;
-        width: 30%;
-    }
-    .comments-on {
-        display: block;
-        width: 75%;
-    }
     .comments-container {
-        position: unset;
-        width: 100%;
+        width: 50%;
+        padding-top: 0;
+        padding-bottom: 5rem;
+    }
+    .comments-container .comments-btn {
+        top: 96%;
+        right: 1rem;
+        width: 35%;
+    }
+}
+@media only screen and (max-width: 550px){
+    .comments-container {
+        width: 70%;
+        padding-top: 0;
+        padding-bottom: 5rem;
     }
 }

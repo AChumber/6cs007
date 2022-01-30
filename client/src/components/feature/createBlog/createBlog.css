@@ -82,6 +82,7 @@
 .modal {
     padding: 0.1rem 1rem;
     text-align: center;
+    z-index: 1000;
 }
 .empty-fields-modal {
     border: 1px solid red;

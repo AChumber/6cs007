@@ -1,7 +1,10 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import { Link, Redirect, withRouter, useLocation, useParams, useHistory } from 'react-router-dom'; 
 import { UserContext } from '../../../context/UserContext';
 import { errorBorderStyle, errorTextColor } from '../../shared/ErrorStyles';
+import TextEditor from './textEditor/TextEditor';
+import { convertToHTML } from 'draft-convert';
+import DOMPurify from 'dompurify';
 import Spinner from '../../shared/spinner/Spinner';
 import './createBlog.css';
 
@@ -26,15 +29,18 @@ const CreateBlog = () => {
     const [isRedirect, setIsRedirect] = useState(false);
     const [showSpinner, setShowSpinner] = useState(false);
     const [isEditBlog, setIsEditBlog] = useState(false);
+    const [isEditLoading, setIsEditLoading] = useState(false);
     const [imgUrl, setImgUrl] = useState('');
     const [user] = useContext(UserContext);
     const { state } = useLocation();
     const { id } = useParams();
     const history = useHistory();
     const editBlogHeading = (<><h1>Edit your Blog</h1><p>Change any field to update your blog post.</p></>)
+    const editorRef = useRef(null);
     
     useEffect(() => {
         if(state.prevPath === '/my-posts') {
+            setIsEditLoading(prevState => !prevState);
             //GET post via URL id and populate state values with retrieved post
             const fetchBlogData = async() => {
                 setIsEditBlog(true);
@@ -55,6 +61,7 @@ const CreateBlog = () => {
                             body: blog.postBody
                         }));
                         blog.postImgUrl && setImgUrl( blog.postImgUrl);  
+                        setIsEditLoading(prevState => !prevState);
                     });
                 }
             fetchBlogData();
@@ -97,11 +104,16 @@ const CreateBlog = () => {
         if(isEditBlog) {
             handlePostUpdate();
         } else {
+            //validate is editor state is empty(<p></p>) after converting to HTML string
+            let convertedEditor = convertToHTML(editorRef.current.state.editorState.getCurrentContent());
+            let cleanHTML = DOMPurify.sanitize(convertedEditor);
+
             //Validate if fields are empty or not
-            if(!formInputs.title || !formInputs.body || !formInputs.description) {
+            if(!formInputs.title || cleanHTML === '<p></p>' || !formInputs.description) {
                 setModals(prevState => ({ ...prevState, emptyFieldsModal: !prevState.emptyFieldsModal }));
                 return null;
             } 
+            
 
             //Upload image file to cloudify and return url to image
             const imagePath = await handleImageUpload();
@@ -118,10 +130,11 @@ const CreateBlog = () => {
                     authorName: `${user.firstName} ${user.surname}`,
                     postTitle: formInputs.title,
                     postDesc: formInputs.description.replace(/\r\n/g, '<br />'),
-                    postBody: formInputs.body,
+                    postBody: cleanHTML,
                     postImgUrl: imagePath
                 })
             }
+
             const response = await fetch('api/blogpost/', submitOptions);
             if(!response.ok){
                 console.log('Response Recieved not ok');
@@ -136,15 +149,21 @@ const CreateBlog = () => {
             } else{ 
                 setShowSpinner(false);
                 setErrMessage(jsonRes.msg);
-            }
+            }            
         }
+        
+
+
         console.timeEnd('Creating Post');
     }
 
     //Handle update of blog if component is updating an existing blog
     const handlePostUpdate = async (e) => {
+        //validate is editor state is empty(<p></p>) after converting to HTML string
+        let convertedEditor = convertToHTML(editorRef.current.state.editorState.getCurrentContent());
+        let cleanHTML = DOMPurify.sanitize(convertedEditor);
         //Validate if fields are empty or not
-        if(!formInputs.title || !formInputs.body || !formInputs.description) {
+        if(!formInputs.title || cleanHTML === '<p></p>' || !formInputs.description) {
             setModals(prevState => ({ ...prevState, emptyFieldsModal: !prevState.emptyFieldsModal }));
             return null;
         } 
@@ -158,10 +177,12 @@ const CreateBlog = () => {
         var reqBody = {
             postTitle: formInputs.title,
             postDesc: formInputs.description,
-            postBody: formInputs.body,
+            postBody: cleanHTML,
         }; 
         //Add new image url if uploaded a new image
         reqBody = formInputs.imageFile ? Object.assign({ postImgUrl: imagePath }, reqBody) : reqBody;
+
+        console.log(reqBody);
 
         //Call API to update blog with id
         const res = await fetch(`/api/blogpost/${id}`, {
@@ -172,6 +193,7 @@ const CreateBlog = () => {
             },
             body: JSON.stringify(reqBody)
         });
+
         const jsonRes = await res.json();
         if(res.status === 200){
             setShowSpinner(false);
@@ -183,6 +205,7 @@ const CreateBlog = () => {
             setShowSpinner(false);
             setErrMessage(jsonRes.msg);
         }
+        
     }
 
     //Change state for field when user types
@@ -201,7 +224,7 @@ const CreateBlog = () => {
         }));
     }
 
-    return(
+    return !isEditLoading && (
         <section className="content-section">
             {isRedirect && <Redirect to='/my-posts'/>}
             <div className="header">
@@ -239,13 +262,23 @@ const CreateBlog = () => {
                         style={ emptyField.description ? errorBorderStyle : null } />
                     { emptyField.description && <small style={errorTextColor}>Please enter the Post's Description</small> }
                 </div>
-                <div className="form-group">
+
+                <div className='form-group'>
+                    <label>{isEditBlog ? 'Edit': 'Enter new'} Blog content:</label>
+                    {
+                        <TextEditor ref={ editorRef } prevEditorContent={ isEditBlog ? formInputs.body : null }   /> 
+                    }
+                </div>
+
+                {/* <div className="form-group">
                     <label htmlFor="body">{isEditBlog ? 'Edit': 'Enter new'} Blog content:</label>
                     <textarea type="text" name="body" value={ formInputs.body }
                         placeholder="Blog Content..." rows="10" onChange={ handleChange }
                         onBlur={ handleOnBlur } style={ emptyField.body ? errorBorderStyle : null }></textarea>
                     { emptyField.body && <small style={errorTextColor}>Please enter the Post's Content</small> }
-                </div>
+                </div> */}
+
+
                 <div className="form-group">
                     <label htmlFor="imageFile">Choose an image to go along with the blog:</label>
                     <input type="file" name="imageFile"

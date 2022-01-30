@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import Loading from '../../shared/loading/Loading';
 import Comments from './comments/Comments';
 import NoPost from './NoPost';
@@ -40,7 +41,8 @@ const SpecificBlog = () => {
         <>
             {isLoading ? <Loading /> :
             Object.keys(post).length === 0 ? <NoPost /> : (
-                <section className={ "specific-blog-container " +(isShowComments ? "comments-on" : '') } >
+                <section className= "specific-blog-container" >
+                    { isShowComments && <div className='specific-post-overlay'></div> }
                     <div className={ "post " +(isShowComments ? "post-comments-layout" : '') }>
                         <div className="post-heading">
                             { post.postImgUrl && <img className="post-image" src={ post.postImgUrl } alt={ post.postTitle } loading="lazy" rel="preload"/> }
@@ -55,7 +57,8 @@ const SpecificBlog = () => {
                             <p><i>{ post.postDesc }</i></p>
                         </div>
                         <div className="specific-post-body">
-                            <p>{ post.postBody }</p>
+                            <div className='specific-post-body-wrapper'
+                                dangerouslySetInnerHTML={ { __html : DOMPurify.sanitize(post.postBody) } } ></div>
                         </div>
                     </div>
 

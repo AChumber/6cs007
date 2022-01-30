@@ -39,22 +39,22 @@ const Navbar = ({ isLoggedIn }) => {
         </>
     );
     return(
-        <>
-        <nav className="navbar">
-            <Link onClick={handleClick} to="/" title="Click to go to Home page">
-                <img className="logo-image" src={Logo} alt="Blogs Logo" />
-            </Link>
-            <div className="drop-down-btn" onClick={ () => setShowLinks(!showLinks) }>
-                <div className={ showLinks ? "toggle" : "" } id="line1"></div>
-                <div className={ showLinks ? "toggle" : "" } id="line2"></div>
-                <div className={ showLinks ? "toggle" : "" } id="line3"></div>
-            </div>
-            <div className={showLinks ? "navbar-link-wrapper show" : "navbar-link-wrapper"} style={widthStyle}>
-                { isLoggedIn ? loggedIn : notloggedIn }
-            </div>
-        </nav>
-        <hr />
-        </>
+        <header>
+            <nav className="navbar">
+                <Link onClick={handleClick} to="/" title="Click to go to Home page">
+                    <img className="logo-image" src={Logo} alt="Blogs Logo" />
+                </Link>
+                <div className="drop-down-btn" onClick={ () => setShowLinks(!showLinks) }>
+                    <div className={ showLinks ? "toggle" : "" } id="line1"></div>
+                    <div className={ showLinks ? "toggle" : "" } id="line2"></div>
+                    <div className={ showLinks ? "toggle" : "" } id="line3"></div>
+                </div>
+                <div className={showLinks ? "navbar-link-wrapper show" : "navbar-link-wrapper"} style={widthStyle}>
+                    { isLoggedIn ? loggedIn : notloggedIn }
+                </div>
+            </nav>
+            <hr />
+        </header>
     );
 }
 

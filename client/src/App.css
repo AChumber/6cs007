@@ -1,6 +1,9 @@
 h2 {
     font-size: var(--subheading-font-size);
 } 
+.content-section {
+    min-height: 80vh;
+}
 /*Phone Size - Smaller text and box size*/
 @media only screen and (max-width: 768px){
     .App h1 {

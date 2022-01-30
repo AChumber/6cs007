@@ -1,5 +1,5 @@
 .post-list-container {
-    min-height: 60vh;
+    min-height: 80vh;
 }
 .my-blogs-grid {
     display: flex;
@@ -76,9 +76,10 @@
 .post-body {
     overflow: hidden;
     text-overflow: ellipsis;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     display: -webkit-box;
+    color: #333;
 }
 .my-post-card .post-ids {
     font-size: var(--small-font-size);

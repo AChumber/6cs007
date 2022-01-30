@@ -1,0 +1,16 @@
+.editor-wrapper {
+    box-shadow: 5px 10px 10px 5px rgb(253, 253, 253);
+    outline: 1px solid #E0E0E0;
+    margin-bottom: 2rem;
+    width: 100%;
+    margin: auto;
+}
+
+.editor-toolbar {
+    background-color: rgb(252, 252, 252);
+    border-bottom: 2px solid #E0E0E0;
+}
+.editor-text-input {
+    padding: 0rem 1rem;
+    background-color: #FFF;
+}

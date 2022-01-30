@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 //UI Component to show the posts. Different Style than RecentBlogs
 const HorizontalBlogCard = ({ title, desc, body, postId, userName, handleDelete }) => {
@@ -9,7 +10,7 @@ const HorizontalBlogCard = ({ title, desc, body, postId, userName, handleDelete 
                 <div className="color-section"></div>
                 <p className="post-title">{ title }</p>
                 <p className="post-desc">{ desc }</p>
-                <p className="post-body">{ body }</p>
+                <div className="post-body" dangerouslySetInnerHTML={ { __html : DOMPurify.sanitize(body) } }></div>
                 <p className="post-ids">{ postId } | { userName }</p>
             </Link>
             <div className="card-btns">
