@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "University 6CS007 Project and Professionalism ",
   "main": "index.js",
+  "engines": {
+    "node": "16.13.0"
+  },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
