@@ -1,2 +1,3 @@
 # 6cs007
-6CS007 Project &amp; Professionalism
+6CS007 Project &amp; Professionalism.
+A blog website using the MERN stack, a project for university course for the module mentioned.
