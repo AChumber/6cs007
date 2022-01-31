@@ -32,13 +32,11 @@ const Posts = () => {
             })
             setIsLoading(false); 
             setIsFetchingNew(false);
-        }        
-        , [posts]
-        );
+        } , [posts]);
 
     useEffect(() => {
         fetchData(); 
-    }, []);
+    }, [fetchData]);
 
     //Handle the change in the select element to change limit in API endpoint
     const handleChange = (e) => {
@@ -49,7 +47,6 @@ const Posts = () => {
         <section className="content-section">
             <div className="header-posts">
                 <h2>Blog Posts</h2>
-                <hr />
             </div>
             <SeachPosts />
             <div className="show-amount">

@@ -9,12 +9,12 @@ const Landing = () => {
         margin: "auto"
     }
     return(
-        <>
+        <div className='content-section'>
             <Hero />
             <div style={ containerStyle }>
                 <RecentBlogs />
             </div>
-        </>
+        </div>
     );
 };
 

@@ -41,7 +41,7 @@ const SpecificBlog = () => {
         <>
             {isLoading ? <Loading /> :
             Object.keys(post).length === 0 ? <NoPost /> : (
-                <section className= "specific-blog-container" >
+                <section className= "specific-blog-container content-section" >
                     { isShowComments && <div className='specific-post-overlay'></div> }
                     <div className={ "post " +(isShowComments ? "post-comments-layout" : '') }>
                         <div className="post-heading">

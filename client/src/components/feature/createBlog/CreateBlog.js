@@ -270,15 +270,6 @@ const CreateBlog = () => {
                     }
                 </div>
 
-                {/* <div className="form-group">
-                    <label htmlFor="body">{isEditBlog ? 'Edit': 'Enter new'} Blog content:</label>
-                    <textarea type="text" name="body" value={ formInputs.body }
-                        placeholder="Blog Content..." rows="10" onChange={ handleChange }
-                        onBlur={ handleOnBlur } style={ emptyField.body ? errorBorderStyle : null }></textarea>
-                    { emptyField.body && <small style={errorTextColor}>Please enter the Post's Content</small> }
-                </div> */}
-
-
                 <div className="form-group">
                     <label htmlFor="imageFile">Choose an image to go along with the blog:</label>
                     <input type="file" name="imageFile"

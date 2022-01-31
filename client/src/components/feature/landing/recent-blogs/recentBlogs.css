@@ -1,12 +1,6 @@
-.section-heading {
-    position: relative;
-}
-.section-heading hr {
-    background: var(--secondary-color);
-    position: absolute;
-    width: 15%;
-    bottom: -10%;
-    left: -2%;
+.section-heading h2 {
+    font-weight: bolder;
+    text-decoration: underline;
 }
 .blog-grid {
     display: grid;

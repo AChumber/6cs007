@@ -37,7 +37,6 @@ const RecentBlogs = () => {
         <section>
             <div className="section-heading">
                 <h2>Recent Blogs</h2>
-                <hr />
             </div>
             <div className="blog-grid">
                 { isFetching ? <Loading /> : 

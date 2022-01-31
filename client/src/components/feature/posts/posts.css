@@ -2,13 +2,8 @@
     position: relative;
     padding: 0 5%;
 }
-.header-posts hr {
-    width: 100px;
-    background-color: var(--secondary-color);
-    position: absolute;
-    left: 4%;
-    bottom: -0%;
-    transform: translate(4%, 500%);
+.header-posts h2 {
+    text-decoration: underline;
 }
 .search-box {
     width: 80%;
