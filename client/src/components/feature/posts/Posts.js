@@ -36,7 +36,7 @@ const Posts = () => {
 
     useEffect(() => {
         fetchData(); 
-    }, [fetchData]);
+    }, []);
 
     //Handle the change in the select element to change limit in API endpoint
     const handleChange = (e) => {
