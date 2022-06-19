@@ -39,7 +39,7 @@ router.post('/', async (req,res) => {
         .catch(err => err && res.status(400).json({ msg: "Invalid email or password" }));
 });
 
-//Validate if the token recieved is valid. Middle that Will run on protected routes
+//Validate if the token recieved is valid. Middleware that Will run on protected routes
 function verifyToken(req, res, next){
     //Get token from header of req
     const token = req.headers['authorisation'];

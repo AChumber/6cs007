@@ -36,6 +36,7 @@ const CreateBlog = () => {
     const { id } = useParams();
     const history = useHistory();
     const editBlogHeading = (<><h1>Edit your Blog</h1><p>Change any field to update your blog post.</p></>)
+    const createBlogHeading = (<><h1>Create a new Blog</h1><p>Fill in the fields to publish your new blog.</p></>);
     const editorRef = useRef(null);
     
     useEffect(() => {
@@ -110,7 +111,9 @@ const CreateBlog = () => {
 
             //Validate if fields are empty or not
             if(!formInputs.title || cleanHTML === '<p></p>' || !formInputs.description) {
+                //Show modal stating fields cannot be empty
                 setModals(prevState => ({ ...prevState, emptyFieldsModal: !prevState.emptyFieldsModal }));
+                setShowSpinner(false);
                 return null;
             } 
             
@@ -228,12 +231,7 @@ const CreateBlog = () => {
         <section className="content-section">
             {isRedirect && <Redirect to='/my-posts'/>}
             <div className="header">
-                { isEditBlog ? editBlogHeading :  
-                    (<>
-                        <h1>Create a new Blog</h1>
-                        <p>Fill in the fields to publish your new blog.</p>
-                    </>)
-                }
+                { isEditBlog ? editBlogHeading : createBlogHeading }
                 <hr />
             </div>
             {

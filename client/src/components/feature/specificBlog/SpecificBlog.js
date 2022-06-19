@@ -36,7 +36,8 @@ const SpecificBlog = () => {
             }
         ))
     }
-
+//TODO: Margin with title and meta data
+//Style sub-title a bit differently (Not center align?)
     return(
         <>
             {isLoading ? <Loading /> :
@@ -64,7 +65,7 @@ const SpecificBlog = () => {
 
                     { isShowComments ? <Comments postId={ id } toggleOff={ toggleComments } comments={post.comments} updateCommentsArray={ updateCommentsArray } /> : (
                         <button className="comments-btn" 
-                            onClick={ () => toggleComments() }>Comments</button>) }
+                            onClick={ () => toggleComments() }><i className="bi bi-chat-left-fill"></i>Comments</button>) }
                 </section>
             )}
         </>

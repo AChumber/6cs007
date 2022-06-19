@@ -4,7 +4,7 @@ const verifyToken = require('../users/auth.js').verifyToken;  //Get token verifi
 
 //@POST blogPosts
 //@DESC Create a new post document in the DB.
-//@ACCESS Public - Need to be logged in
+//@ACCESS Private - Need to be logged in
 router.post('/', verifyToken, async (req,res) => {
     const { authorEmail, authorName, postTitle, postDesc, postBody, postImgUrl } = req.body;
 
@@ -24,7 +24,8 @@ router.post('/', verifyToken, async (req,res) => {
     });
 
     //Save blog post to DB
-    newBlog.save()
+    newBlog
+        .save()
         .then(blog => {
             return res.status(200).json({ msg: "Blog Post posted", blog });
         })
@@ -36,7 +37,7 @@ router.post('/', verifyToken, async (req,res) => {
 
 //@POST myPosts
 //@DESC Return all blogs that are authored by the email passed(unique)
-//@ACCESS Public - Need to be logged in
+//@ACCESS Private - Need to be logged in
 router.post('/my-posts', verifyToken, async (req, res) => {
     const { authorEmail } = req.body;
 
@@ -123,7 +124,7 @@ router.get('/:id', async (req, res) => {
 //@DELETE blogPost (pass id of blog post)
 //@DESC Deletes one blogs in DB with specified id in req.
 //      Will verify with middleware 
-//@ACCESS Public - Need to be logged in
+//@ACCESS Private - Need to be logged in
 router.delete('/:id', verifyToken, async (req,res) => {
     const id = req.params.id;
     await Post.findByIdAndDelete(id)
@@ -136,8 +137,7 @@ router.delete('/:id', verifyToken, async (req,res) => {
 
 //@PUT blogPost (pass id of blog post)
 //@DESC Updates one blogs in DB with specified id in req.
-//      Will verify with middleware 
-//@ACCESS Public - Need to be logged in 
+//@ACCESS Private - Need to be logged in 
 router.put('/:id', verifyToken, async (req, res) => {
     const { postTitle, postDesc, postBody, postImgUrl } = req.body;
     //Wont update all fields. Just fields like title, body or desc
@@ -159,8 +159,7 @@ router.put('/:id', verifyToken, async (req, res) => {
 
 //@PUT comment (pass id of blog post to add comment to 'comments' array)
 //@DESC Adds a new comment to post in DB with specified id in req.
-//      Will verify with middleware 
-//@ACCESS Public - Need to be logged in
+//@ACCESS Private - Need to be logged in
 router.post('/comment', async (req, res) => {
     const { commentAuthor, commentBody, postId } = req.body;
     const comment = new Comment({

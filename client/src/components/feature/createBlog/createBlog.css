@@ -92,7 +92,7 @@
 }
 .success-text {
     color: green;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -100,6 +100,7 @@
     border: 1px solid green;
     padding: 1rem 1.5rem;
     border-radius: 5px;
+    z-index: 100;
 }
 .success-text h5 {
     text-align: center;
