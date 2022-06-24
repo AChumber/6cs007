@@ -26,13 +26,14 @@ const Navbar = ({ isLoggedIn }) => {
     }
     const notloggedIn = (
         <>
-            <Link onClick={handleClick} to="/posts" className="navbar-link">Search posts</Link>
+            <Link onClick={handleClick} to="/posts" className="navbar-link">Search Posts</Link>
             <Link onClick={handleClick} to="/login" className="navbar-link">Login</Link>
             <Link onClick={handleClick} to="/create-account" className="navbar-link navbar-button">Sign Up</Link>
         </>
     );
     const loggedIn = (
         <>
+            <Link onClick={handleClick} to="/posts" className="navbar-link">Search Posts</Link>
             <Link onClick={handleClick} to={{ pathname: "/create-post", state: { prevPath: 'navbar' }}} className="navbar-link">Create new Blog</Link>
             <Link onClick={handleClick} to="/my-posts" className="navbar-link">My Blogs</Link>
             <Link to="/" className="navbar-link navbar-button" onClick={ handleLogOut }>Log Out</Link>
