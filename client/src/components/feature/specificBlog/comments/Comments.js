@@ -10,7 +10,7 @@ const Comments = ({ postId, toggleOff, comments, updateCommentsArray }) => {
 
     return(
         <div className="comments-container">
-            <button className="comments-btn" onClick={() => toggleOff()}>Close Comments</button>
+            <button className="close-comments-btn" onClick={() => toggleOff()}>Close Comments</button>
             {
                 (comments.length === 0) ? (
                     <>

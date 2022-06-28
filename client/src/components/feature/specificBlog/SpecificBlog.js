@@ -64,8 +64,8 @@ const SpecificBlog = () => {
                     </div>
 
                     { isShowComments ? <Comments postId={ id } toggleOff={ toggleComments } comments={post.comments} updateCommentsArray={ updateCommentsArray } /> : (
-                        <button className="comments-btn" 
-                            onClick={ () => toggleComments() }><i className="bi bi-chat-left-fill"></i>Comments</button>) }
+                        <button className="comments-btn" title='Open Comments Draw'
+                            onClick={ () => toggleComments() }><i className="bi bi-chat-left-fill"></i></button>) }
                 </section>
             )}
         </>
