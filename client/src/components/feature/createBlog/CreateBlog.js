@@ -89,9 +89,9 @@ const CreateBlog = () => {
                 })
                 .catch(err => console.log(err.message));
 
-            //Retrieve a compressed version of the image via q_70
+            //Retrieve a compressed version of the image via q_90
             let compressedImgUrl = imageUrl.split('/');
-            compressedImgUrl.splice(6, 0, 'w_912,h_500,c_fill,q_70');
+            compressedImgUrl.splice(6, 0, 'w_912,h_500,c_fill,q_90');
             return compressedImgUrl.join('/');
         }
         return imageUrl;
