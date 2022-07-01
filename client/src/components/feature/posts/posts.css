@@ -6,12 +6,13 @@
     text-decoration: underline;
 }
 .search-box {
-    width: 80%;
+    width: 85%;
     margin: 1rem auto;
     position: relative;
 }
 .search-box input[type=text] {
-    width: 94%;
+    box-sizing: border-box;
+    width: 100%;
     padding: 1rem;
     border-radius: 5px;
     border: 1px solid var(--primary-color);
@@ -23,6 +24,9 @@
     width: 100%;
     background-color: #f3f3f3;
     z-index: 1;
+    -webkit-box-shadow: 6px 5px 13.5px 0 #bababa;
+    -moz-box-shadow: 6px 5px 13.5px 0 #bababa;
+    box-shadow: 6px 5px 13.5px 0 #bababa;
 }
 #search-results ul {
     list-style: none;
